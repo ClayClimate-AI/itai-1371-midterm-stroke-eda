@@ -60,17 +60,20 @@ a value it did not see in train (for example `OneHotEncoder(handle_unknown="igno
 * **Source:** Canvas GL2 and GL4; D2 card; train EDA in notebooks/02_eda_train.ipynb (gender counts) and notebooks/01_load_split.ipynb (id check); scikit-learn OneHotEncoder documentation (handle_unknown)
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
+  `notebooks/03_preprocess_before_after.ipynb` cells 8 (rule), 9 and 10 (counts and removal),
+  11 (before and after chart), 15 (unseen value); validator report
+  `docs/reports/data-validator/H3_20261004_1618.md` §1 and §2
 
 * **What I will watch for:** The test set could still hold an "Other" value. The encoder uses `handle_unknown="ignore"`, so that row gets all zeros in the gender group instead of crashing. Once id is dropped, processed rows can't be traced back to the raw file.
 
 * **Value set in `src/stroke_prep/config.py`:** none (D2 has no slot; the row removal and id drop are code in notebook 03)
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0002-d2-remove-other-row-drop-id.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 3:22PM (CT)
 
 ## Review at H3 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H3 evidence I looked at:** nb03 cells 10, 15: 3577 rows to 3576, the Other row removed; unseen gender gives all zeros.
+* **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)

@@ -51,17 +51,21 @@ False for A or C). The one hot group test reads it.
 * **Source:** Canvas P5 and P6; D4 card; scikit-learn OneHotEncoder documentation; category counts in notebooks/02_eda_train.ipynb
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
+  `notebooks/03_preprocess_before_after.ipynb` cells 29 to 32 (columns, group sums, chart,
+  head); `notebooks/04_smote_balance.ipynb` cells 31, 32 (work_type one hot chart), 39;
+  validator reports `docs/reports/data-validator/H3_20261004_1618.md` §2, §5 and
+  `docs/reports/data-validator/H3_20261004_1704.md` §3
 
 * **What I will watch for:** More columns, and each group always adds up to 1, which matters for some linear models in the Final. Train and test must end up with the same column names in the same order.
 
 * **Value set in `src/stroke_prep/config.py`:** `ONEHOT_DROP_FIRST = False`
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0004-d4-full-one-hot-encoding.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 3:30 PM (CT)
 
 ## Review at H3 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H3 evidence I looked at:** nb03 cells 29, 30: 11 to 18 columns, and every one hot group sums to 1 on 3576 rows.
+* **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)

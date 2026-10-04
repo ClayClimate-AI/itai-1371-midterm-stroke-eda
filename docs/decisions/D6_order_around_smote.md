@@ -56,17 +56,21 @@ train only.
 * **Source:** Prof Rao in class, Oct 1, 2026; Canvas P4; D6 card; imbalanced-learn SMOTE documentation
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
+  `notebooks/03_preprocess_before_after.ipynb` cell 2 (step order heading), cells 14 and 20;
+  `notebooks/04_smote_balance.ipynb` cells 8, 12 (synthetic rows in real units), 27 and 28
+  (real vs synthetic chart and table); validator report
+  `docs/reports/data-validator/H3_20261004_1618.md` §1, §2
 
 * **What I will watch for:** SMOTE will create in between values in the 0/1 and one hot columns (like 0.4 for hypertension), which D8 repairs. The scaler describes real train rows only, because it is fit before SMOTE. Test goes through the same train fitted steps and is never balanced.
 
 * **Value set in `src/stroke_prep/config.py`:** none (D6 has no slot)
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0006-d6-fill-encode-scale-then-smote.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 3:32PM (CT)
 
 ## Review at H3 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H3 evidence I looked at:** nb03 cell 20, nb04 cell 8: prepared (3576, 18), then (10200, 19) after SMOTE, no error.
+* **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)

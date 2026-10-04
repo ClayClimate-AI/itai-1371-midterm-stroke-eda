@@ -58,17 +58,20 @@ your H3 summary. At H3 you keep or amend the decision.
 * **Source:** Canvas P1 and P7; D3 card; train EDA in notebooks/02_eda_train.ipynb (missing values cell, bmi histogram); scikit-learn SimpleImputer documentation
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
+  `notebooks/03_preprocess_before_after.ipynb` cells 14 (fit), 18 to 22 (counts and flag),
+  23 to 25 (before and after charts and table); `notebooks/04_smote_balance.ipynb` cell 40
+  (test fill check); validator report `docs/reports/data-validator/H3_20261004_1618.md` §2, §3
 
 * **What I will watch for:** All 138 filled rows get the same value, which narrows bmi's spread a little. `bmi_missing` has to stay 0/1 after SMOTE (the D8 repair handles that). No blanks can remain after this step.
 
 * **Value set in `src/stroke_prep/config.py`:** `IMPUTE_STRATEGY = "median"`, `ADD_MISSING_FLAG = True`
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0003-d3-median-fill-with-missing-flag.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 3:26PM (CT)
 
 ## Review at H3 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H3 evidence I looked at:** nb03 cells 14, 21, 24: 138 bmi filled with median 28.1, missing left 0, std 7.9414 to 7.7881.
+* **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)

@@ -49,17 +49,21 @@ your H3 summary. At H3 you keep or amend the decision.
 * **Source:** Prof Rao in class, Oct 1, 2026; Canvas P4; D7 card; imbalanced-learn SMOTE documentation; work_type counts in notebooks/02_eda_train.ipynb
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
+  `notebooks/04_smote_balance.ipynb` cells 5 (settings), 7 to 10 (counts and chart), 12 to 15
+  (synthetic rows, real rows check, dtypes); validator reports
+  `docs/reports/data-validator/H3_20261004_1618.md` §2 and
+  `docs/reports/data-validator/H3_20261004_1704.md` §2, §4
 
 * **What I will watch for:** Never_worked grows from 13 rows to about 2,040, so about 99% of that group will be synthetic, made from only 13 real rows. I'll compare its synthetic rows against the real ones. Synthetic stroke values come out blended and must be rounded back to 0/1. The real rows must come back unchanged.
 
 * **Value set in `src/stroke_prep/config.py`:** `SMOTE_VARIANT = "SMOTE"`, `SMOTE_K_NEIGHBORS = 5`, `SMOTE_SAMPLING_STRATEGY = "auto"`, `SMOTE_RANDOM_STATE = 33`
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0007-d7-plain-smote-settings.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 3:33PM (CT)
 
 ## Review at H3 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H3 evidence I looked at:** nb04 cells 9, 13: every work_type group 2040, 6624 added, Never_worked +2027, real rows same.
+* **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)
