@@ -37,7 +37,7 @@ SYNTHETIC_FLAG = "is_synthetic"   # column name, used only if D8 sets FLAG_SYNTH
 # and tells you which card fills it.
 
 # D1 split: docs/decisions/D1_split.md
-SPLIT_SEED: int | None = None          # D1
+SPLIT_SEED: int | None = 33          # D1
 STRATIFY_ON: str | list[str] | None = None   # D1 (None is also a valid choice: write it in D1)
 
 # D3 missing values: docs/decisions/D3_missing_values.md

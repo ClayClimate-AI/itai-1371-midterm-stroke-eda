@@ -39,14 +39,22 @@ Do this before any EDA, and look only at shares, not at relationships between co
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** A
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  Canvas S3 asks for a 70/30 split in Python and nothing more, so a plain random split (option A) meets it as written. A random split is a shuffle made by a formula, and the seed (`random_state`) is that formula's starting number. When I set a fixed seed, the same rows land in train and test every run. If I leave it unset, the starting number changes each time, so the split changes and can't be reproduced. The seed alone isn't enough, though. Reproducibility needs the same data, the same code, and the same seed, which is why the repo pins all three. The number I pick doesn't affect quality. I set it once and won't change it after seeing results, because trying seeds until results look better is cherry picking.
+
+* **Source:** Canvas S3 (70/30 split in Python); D1 card; tutor-reviewer explanation, Oct 4, 2026
+
 * **Evidence** (added at H2: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `SPLIT_SEED`, `STRATIFY_ON`; blank until you sign):
+
+* **What I will watch for:** If I ever changed the seed after seeing results, that would be cherry picking. I'll keep it fixed.
+
+* **Value set in `src/stroke_prep/config.py`:** `SPLIT_SEED = 33`, `STRATIFY_ON = None`
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 9:49 AM (CT)
 
 ## Review at H2 (Joseph)
 
