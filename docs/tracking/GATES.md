@@ -40,7 +40,7 @@ They must STOP and escalate (it reaches you under "Waiting for you" in the summa
 
 | Checkpoint | Date and time (CT) | Commit | Summary file | Corrections I asked for | Signed |
 |---|---|---|---|---|---|
-| H1 | | | | | |
+| H1 | | | | D2 to D8 deferred to H2; decided from train EDA | |
 | H2 | | | | | |
 | H3 | | | | | |
 | H4 | | | | | |
