@@ -1,0 +1,42 @@
+{
+  "permissions": {
+    "blockReadsOutsideWorkingDirectories": true,
+    "deny": [
+      "WebFetch",
+      "WebSearch",
+      "Read(//**/*.zip)",
+      "Edit(/data/raw/**)",
+      "Edit(/docs/decisions/**)",
+      "Edit(/docs/tracking/**)",
+      "Edit(/docs/journals/**)",
+      "Edit(/docs/adr/**)",
+      "Edit(/docs/rca/**)",
+      "Edit(/docs/specs/**)",
+      "Edit(/docs/dataset_url.md)",
+      "Edit(/docs/reports/README.md)",
+      "Edit(/docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md)",
+      "Edit(/src/stroke_prep/config.py)",
+      "Edit(/src/stroke_prep/__init__.py)",
+      "Edit(/tests/**)",
+      "Edit(/scripts/**)",
+      "Edit(/.github/**)",
+      "Edit(/.claude/**)",
+      "Edit(/.kiro/**)",
+      "Edit(/requirements.txt)",
+      "Edit(/pyproject.toml)",
+      "Edit(/.pre-commit-config.yaml)",
+      "Edit(/README.md)",
+      "Edit(/LAB_GUIDE.md)",
+      "Edit(/CLAUDE.md)",
+      "Edit(/VALIDATION_PROTOCOL.md)",
+      "Edit(/START_HERE.md)",
+      "Edit(/LICENSE)",
+      "Bash(git tag *)",
+      "Bash(git push *)",
+      "Bash(git remote *)",
+      "Bash(gh *)",
+      "Bash(curl *)",
+      "Bash(wget *)"
+    ]
+  }
+}

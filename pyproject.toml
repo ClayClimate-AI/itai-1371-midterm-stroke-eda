@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 100
+extend-exclude = ["scratch", ".nbrun"]
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+norecursedirs = ["scratch", ".nbrun", ".venv", ".git", "data"]

@@ -1,0 +1,247 @@
+{
+  "name": "repo-auditor",
+  "description": "Audits reproducibility (quick mode at H2 and H3; fresh clone, new venv, full rerun at H1 and H4), keeps RUN_LOG.md, makes the local commits of agent work, and writes the one page checkpoint summary including the work-verifier section verbatim. Never pushes, never pre ticks an approval.",
+  "prompt": "file://../prompts/repo-auditor.md",
+  "tools": [
+    "read",
+    "glob",
+    "grep",
+    "write",
+    "shell"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "data/raw/**",
+          "docs/decisions/**",
+          "docs/tracking/**",
+          "docs/journals/**",
+          "docs/adr/**",
+          "docs/rca/**",
+          "docs/specs/**",
+          "docs/dataset_url.md",
+          "docs/reports/README.md",
+          "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+          "tests/**",
+          "scripts/**",
+          ".github/**",
+          ".claude/**",
+          ".kiro/**",
+          "requirements.txt",
+          "pyproject.toml",
+          ".pre-commit-config.yaml",
+          "src/stroke_prep/config.py",
+          "src/stroke_prep/__init__.py",
+          "README.md",
+          "LAB_GUIDE.md",
+          "CLAUDE.md",
+          "VALIDATION_PROTOCOL.md",
+          "START_HERE.md",
+          "LAB_GUIDE.pdf",
+          "LICENSE"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_read",
+        "match": [
+          "**/*.zip"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push*",
+          "git tag*",
+          "git remote*",
+          "gh *",
+          "curl *",
+          "wget *"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "web_fetch",
+        "effect": "deny"
+      },
+      {
+        "capability": "web_search",
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "**"
+        ],
+        "exclude": [
+          "docs/reports/repo-auditor/**",
+          "docs/reports/RUN_LOG.md",
+          "docs/reports/H*_SUMMARY.md",
+          ".gitignore"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/reports/repo-auditor/**",
+          "docs/reports/RUN_LOG.md",
+          "docs/reports/H*_SUMMARY.md",
+          ".gitignore"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git reset*",
+          "git checkout*",
+          "git restore*",
+          "git stash*",
+          "git clean*",
+          "git rebase*",
+          "git merge*",
+          "git switch*",
+          "git commit --amend*",
+          "git rm*",
+          "ruff check --fix*",
+          "ruff format*"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git log*",
+          "git diff*",
+          "git show*",
+          "python scripts/setup_gate.py*",
+          "python3 scripts/setup_gate.py*",
+          "python scripts/check_raw_hash.py*",
+          "python3 scripts/check_raw_hash.py*",
+          "python scripts/list_claims.py*",
+          "python3 scripts/list_claims.py*",
+          "python scripts/compare_outputs.py*",
+          "python3 scripts/compare_outputs.py*",
+          "python -m pytest -q -p no:cacheprovider*",
+          "python3 -m pytest -q -p no:cacheprovider*",
+          "C=scratch/clones/*",
+          "mkdir -p scratch/clones*",
+          "git clone --quiet . scratch/clones/*",
+          "cd scratch/clones/*",
+          "cd -*",
+          "git add*",
+          "git commit*",
+          "ruff check --no-cache*"
+        ],
+        "effect": "allow"
+      }
+    ]
+  },
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": [
+        "docs/reports/repo-auditor/**",
+        "docs/reports/RUN_LOG.md",
+        "docs/reports/H*_SUMMARY.md",
+        ".gitignore"
+      ],
+      "deniedPaths": [
+        "data/raw",
+        "docs/decisions",
+        "docs/tracking",
+        "docs/journals",
+        "docs/adr",
+        "docs/rca",
+        "docs/specs",
+        "docs/dataset_url.md",
+        "docs/reports/README.md",
+        "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+        "tests",
+        "scripts",
+        ".github",
+        ".claude",
+        ".kiro",
+        "requirements.txt",
+        "pyproject.toml",
+        ".pre-commit-config.yaml",
+        "src/stroke_prep/config.py",
+        "src/stroke_prep/__init__.py",
+        "README.md",
+        "LAB_GUIDE.md",
+        "CLAUDE.md",
+        "VALIDATION_PROTOCOL.md",
+        "START_HERE.md",
+        "LAB_GUIDE.pdf",
+        "LICENSE",
+        "notebooks",
+        "src",
+        "data",
+        ".nbrun"
+      ]
+    },
+    "shell": {
+      "allowedCommands": [
+        "git status.*",
+        "git log.*",
+        "git diff.*",
+        "git show.*",
+        "python scripts/setup_gate\\.py.*",
+        "python3 scripts/setup_gate\\.py.*",
+        "python scripts/check_raw_hash\\.py.*",
+        "python3 scripts/check_raw_hash\\.py.*",
+        "python scripts/list_claims\\.py.*",
+        "python3 scripts/list_claims\\.py.*",
+        "python scripts/compare_outputs\\.py.*",
+        "python3 scripts/compare_outputs\\.py.*",
+        "python \\-m pytest \\-q \\-p no:cacheprovider.*",
+        "python3 \\-m pytest \\-q \\-p no:cacheprovider.*",
+        "C=scratch/clones/.*",
+        "mkdir \\-p scratch/clones.*",
+        "git clone \\-\\-quiet \\. scratch/clones/.*",
+        "cd scratch/clones/.*",
+        "cd \\-.*",
+        "git add.*",
+        "git commit.*",
+        "ruff check \\-\\-no\\-cache.*"
+      ],
+      "deniedCommands": [
+        "git push.*",
+        "git tag.*",
+        "git remote.*",
+        "gh .*",
+        "curl .*",
+        "wget .*",
+        "git reset.*",
+        "git checkout.*",
+        "git restore.*",
+        "git stash.*",
+        "git clean.*",
+        "git rebase.*",
+        "git merge.*",
+        "git switch.*",
+        "git commit \\-\\-amend.*",
+        "git rm.*",
+        "ruff check \\-\\-fix.*",
+        "ruff format.*"
+      ]
+    },
+    "read": {
+      "allowedPaths": [
+        "./**"
+      ],
+      "deniedPaths": [
+        "**/*.zip"
+      ]
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "includeMcpJson": false,
+  "welcomeMessage": "Repo auditor: reproducibility audit, RUN_LOG, summary, agent commits. Never pushes."
+}

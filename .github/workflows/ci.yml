@@ -1,0 +1,89 @@
+name: CI midterm checkpoints
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  checkpoints:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Joseph's Mac runs Python 3.14; the pins were first verified on 3.13. CI checks both.
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.13", "3.14"]
+    steps:
+      - name: Checkout committed code
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install pinned dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Environment check (H1)
+        run: |
+          python scripts/setup_gate.py
+          python -m pytest -q tests/test_dependencies.py
+
+      - name: Raw data hash check (no manual edits)
+        run: python scripts/check_raw_hash.py
+
+      - name: Lint
+        run: ruff check src tests scripts
+
+      - name: Environment, raw data, invariant and contract tests
+        run: python -m pytest -q tests
+
+      - name: Execute notebooks top to bottom (headless Restart and Run All)
+        run: |
+          python -m ipykernel install --user --name python3
+          shopt -s nullglob
+          nbs=(notebooks/0*.ipynb)
+          if [ ${#nbs[@]} -eq 0 ]; then
+            echo "::warning::No notebooks yet (expected before H2). Skipping execution."
+          fi
+          for nb in "${nbs[@]}"; do
+            echo "Executing $nb"
+            jupyter nbconvert --to notebook --execute --inplace \
+              --ExecutePreprocessor.timeout=600 \
+              --ExecutePreprocessor.kernel_name=python3 "$nb"
+          done
+
+      - name: Raw data hash check after notebooks ran
+        run: python scripts/check_raw_hash.py
+
+      - name: Upload executed notebooks
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: executed-notebooks-py${{ matrix.python-version }}
+          path: notebooks/*.ipynb
+          if-no-files-found: ignore
+
+  # Separate job on purpose. It lists which of the 8 Canvas deliverables are still missing.
+  # EXPECTED RED (shown as a warning, does not fail the run) until checkpoint H4.
+  # At H4, delete the continue-on-error line so a missing deliverable fails CI.
+  deliverables:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - name: Checkout committed code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+
+      - name: Deliverable files exist (expected red until H4, then remove continue-on-error)
+        run: python scripts/check_deliverables.py

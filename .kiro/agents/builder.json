@@ -1,0 +1,187 @@
+{
+  "name": "builder",
+  "description": "Main session and orchestrator. Creates new notebook code cells, headings, empty placeholders and new pipeline.py function bodies strictly from signed decision cards and specs, then delegates running, checking and auditing to the five project agents in the checkpoint order. Never decides, interprets, commits or pushes.",
+  "prompt": "file://../prompts/builder.md",
+  "tools": [
+    "read",
+    "glob",
+    "grep",
+    "write",
+    "shell",
+    "subagent"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "data/raw/**",
+          "docs/decisions/**",
+          "docs/tracking/**",
+          "docs/journals/**",
+          "docs/adr/**",
+          "docs/rca/**",
+          "docs/specs/**",
+          "docs/dataset_url.md",
+          "docs/reports/README.md",
+          "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+          "tests/**",
+          "scripts/**",
+          ".github/**",
+          ".claude/**",
+          ".kiro/**",
+          "requirements.txt",
+          "pyproject.toml",
+          ".pre-commit-config.yaml",
+          "src/stroke_prep/config.py",
+          "src/stroke_prep/__init__.py",
+          "README.md",
+          "LAB_GUIDE.md",
+          "CLAUDE.md",
+          "VALIDATION_PROTOCOL.md",
+          "START_HERE.md",
+          "LAB_GUIDE.pdf",
+          "LICENSE"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_read",
+        "match": [
+          "**/*.zip"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push*",
+          "git tag*",
+          "git remote*",
+          "gh *",
+          "curl *",
+          "wget *"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "web_fetch",
+        "effect": "deny"
+      },
+      {
+        "capability": "web_search",
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "notebooks/**",
+          "src/stroke_prep/pipeline.py"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git log*",
+          "git diff*",
+          "python scripts/setup_gate.py*",
+          "python3 scripts/setup_gate.py*",
+          "python scripts/check_raw_hash.py*",
+          "python3 scripts/check_raw_hash.py*",
+          "python -m pytest*",
+          "python3 -m pytest*"
+        ],
+        "effect": "allow"
+      }
+    ]
+  },
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": [
+        "notebooks/**",
+        "src/stroke_prep/pipeline.py"
+      ],
+      "deniedPaths": [
+        "data/raw",
+        "docs/decisions",
+        "docs/tracking",
+        "docs/journals",
+        "docs/adr",
+        "docs/rca",
+        "docs/specs",
+        "docs/dataset_url.md",
+        "docs/reports/README.md",
+        "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+        "tests",
+        "scripts",
+        ".github",
+        ".claude",
+        ".kiro",
+        "requirements.txt",
+        "pyproject.toml",
+        ".pre-commit-config.yaml",
+        "src/stroke_prep/config.py",
+        "src/stroke_prep/__init__.py",
+        "README.md",
+        "LAB_GUIDE.md",
+        "CLAUDE.md",
+        "VALIDATION_PROTOCOL.md",
+        "START_HERE.md",
+        "LAB_GUIDE.pdf",
+        "LICENSE"
+      ]
+    },
+    "shell": {
+      "allowedCommands": [
+        "git status.*",
+        "git log.*",
+        "git diff.*",
+        "python scripts/setup_gate\\.py.*",
+        "python3 scripts/setup_gate\\.py.*",
+        "python scripts/check_raw_hash\\.py.*",
+        "python3 scripts/check_raw_hash\\.py.*",
+        "python \\-m pytest.*",
+        "python3 \\-m pytest.*"
+      ],
+      "deniedCommands": [
+        "git push.*",
+        "git tag.*",
+        "git remote.*",
+        "gh .*",
+        "curl .*",
+        "wget .*"
+      ]
+    },
+    "read": {
+      "allowedPaths": [
+        "./**"
+      ],
+      "deniedPaths": [
+        "**/*.zip"
+      ]
+    },
+    "subagent": {
+      "availableAgents": [
+        "notebook-runner",
+        "data-validator",
+        "work-verifier",
+        "repo-auditor",
+        "tutor-reviewer"
+      ],
+      "trustedAgents": [
+        "notebook-runner",
+        "data-validator",
+        "work-verifier",
+        "repo-auditor",
+        "tutor-reviewer"
+      ]
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "includeMcpJson": false,
+  "welcomeMessage": "Builder ready. H1 to H4 are the only checkpoints. I build only from signed cards."
+}

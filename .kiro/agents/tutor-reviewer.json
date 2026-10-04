@@ -1,0 +1,103 @@
+{
+  "name": "tutor-reviewer",
+  "description": "Explains a concept simply, then in real technical terms, and asks Joseph questions that help him decide and write. Reviews his drafts for clarity and gaps only. Never makes a decision, never writes conclusions or analysis text. Use when Joseph asks what something means, is filling the decision cards at H1, or wants a draft reviewed.",
+  "prompt": "file://../prompts/tutor-reviewer.md",
+  "tools": [
+    "read",
+    "glob",
+    "grep"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "data/raw/**",
+          "docs/decisions/**",
+          "docs/tracking/**",
+          "docs/journals/**",
+          "docs/adr/**",
+          "docs/rca/**",
+          "docs/specs/**",
+          "docs/dataset_url.md",
+          "docs/reports/README.md",
+          "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+          "tests/**",
+          "scripts/**",
+          ".github/**",
+          ".claude/**",
+          ".kiro/**",
+          "requirements.txt",
+          "pyproject.toml",
+          ".pre-commit-config.yaml",
+          "src/stroke_prep/config.py",
+          "src/stroke_prep/__init__.py",
+          "README.md",
+          "LAB_GUIDE.md",
+          "CLAUDE.md",
+          "VALIDATION_PROTOCOL.md",
+          "START_HERE.md",
+          "LAB_GUIDE.pdf",
+          "LICENSE"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_read",
+        "match": [
+          "**/*.zip"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push*",
+          "git tag*",
+          "git remote*",
+          "gh *",
+          "curl *",
+          "wget *"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "web_fetch",
+        "effect": "deny"
+      },
+      {
+        "capability": "web_search",
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "*"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "toolsSettings": {
+    "read": {
+      "allowedPaths": [
+        "./**"
+      ],
+      "deniedPaths": [
+        "**/*.zip"
+      ]
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "includeMcpJson": false,
+  "welcomeMessage": "Tutor: I explain and ask questions. I never decide or write your text."
+}

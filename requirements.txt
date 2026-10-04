@@ -1,0 +1,24 @@
+# ITAI 1371 Midterm EDA (stroke dataset). Pinned to the set verified on Sep 28, 2026
+# (Python 3.13.5, full pytest suite green). Rechecked Oct 3, 2026 for kit v5.1: the same pins
+# install and pass the suite on Python 3.14.8 and 3.13.16, and every compiled package has a
+# macOS arm64 wheel for Python 3.14. CI tests 3.13 and 3.14. Upgrade one line at a time and
+# re-run tests.
+
+# Data and ML
+pandas==3.0.6
+numpy==2.5.3
+scikit-learn==1.9.1
+imbalanced-learn==0.14.2      # needs scikit-learn >=1.4.2,<2 ; uses sklearn-compat shim
+matplotlib==3.11.2
+seaborn==0.13.2               # optional, plots can be pure Matplotlib
+
+# Notebook
+jupyterlab==4.6.4
+ipykernel==7.3.0
+nbconvert==7.17.1
+
+# Quality gates
+pytest==9.1.1
+nbstripout==0.9.1
+ruff==0.16.9
+pre-commit==4.6.2

@@ -1,0 +1,236 @@
+{
+  "name": "data-validator",
+  "description": "Independently recomputes every number Joseph writes in his prose from the CSV files, runs the decision cards' test checks (raw outputs only), and checks leakage and integrity invariants. Writes only its own report. Use in the loop between checkpoints and before every checkpoint summary.",
+  "prompt": "file://../prompts/data-validator.md",
+  "tools": [
+    "read",
+    "glob",
+    "grep",
+    "write",
+    "shell"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "data/raw/**",
+          "docs/decisions/**",
+          "docs/tracking/**",
+          "docs/journals/**",
+          "docs/adr/**",
+          "docs/rca/**",
+          "docs/specs/**",
+          "docs/dataset_url.md",
+          "docs/reports/README.md",
+          "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+          "tests/**",
+          "scripts/**",
+          ".github/**",
+          ".claude/**",
+          ".kiro/**",
+          "requirements.txt",
+          "pyproject.toml",
+          ".pre-commit-config.yaml",
+          "src/stroke_prep/config.py",
+          "src/stroke_prep/__init__.py",
+          "README.md",
+          "LAB_GUIDE.md",
+          "CLAUDE.md",
+          "VALIDATION_PROTOCOL.md",
+          "START_HERE.md",
+          "LAB_GUIDE.pdf",
+          "LICENSE"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_read",
+        "match": [
+          "**/*.zip"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git push*",
+          "git tag*",
+          "git remote*",
+          "gh *",
+          "curl *",
+          "wget *"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "web_fetch",
+        "effect": "deny"
+      },
+      {
+        "capability": "web_search",
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "**"
+        ],
+        "exclude": [
+          "docs/reports/data-validator/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/reports/data-validator/**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git add*",
+          "git commit*",
+          "git reset*",
+          "git checkout*",
+          "git restore*",
+          "git stash*",
+          "git rm*",
+          "git mv*",
+          "git clean*",
+          "git rebase*",
+          "git merge*",
+          "git switch*",
+          "pip install*",
+          "pip uninstall*",
+          "ruff check --fix*",
+          "ruff format*",
+          "git clone*",
+          "rm *"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "git status*",
+          "git log*",
+          "git diff*",
+          "git show*",
+          "python scripts/setup_gate.py*",
+          "python3 scripts/setup_gate.py*",
+          "python scripts/check_raw_hash.py*",
+          "python3 scripts/check_raw_hash.py*",
+          "python scripts/list_claims.py*",
+          "python3 scripts/list_claims.py*",
+          "python scripts/compare_outputs.py*",
+          "python3 scripts/compare_outputs.py*",
+          "python -m pytest -q -p no:cacheprovider*",
+          "python3 -m pytest -q -p no:cacheprovider*"
+        ],
+        "effect": "allow"
+      }
+    ]
+  },
+  "toolsSettings": {
+    "write": {
+      "allowedPaths": [
+        "docs/reports/data-validator/**"
+      ],
+      "deniedPaths": [
+        "data/raw",
+        "docs/decisions",
+        "docs/tracking",
+        "docs/journals",
+        "docs/adr",
+        "docs/rca",
+        "docs/specs",
+        "docs/dataset_url.md",
+        "docs/reports/README.md",
+        "docs/reports/CHECKPOINT_SUMMARY_TEMPLATE.md",
+        "tests",
+        "scripts",
+        ".github",
+        ".claude",
+        ".kiro",
+        "requirements.txt",
+        "pyproject.toml",
+        ".pre-commit-config.yaml",
+        "src/stroke_prep/config.py",
+        "src/stroke_prep/__init__.py",
+        "README.md",
+        "LAB_GUIDE.md",
+        "CLAUDE.md",
+        "VALIDATION_PROTOCOL.md",
+        "START_HERE.md",
+        "LAB_GUIDE.pdf",
+        "LICENSE",
+        "notebooks",
+        "src",
+        "data",
+        "docs/reports/RUN_LOG.md",
+        ".gitignore",
+        ".nbrun"
+      ]
+    },
+    "shell": {
+      "allowedCommands": [
+        "git status.*",
+        "git log.*",
+        "git diff.*",
+        "git show.*",
+        "python scripts/setup_gate\\.py.*",
+        "python3 scripts/setup_gate\\.py.*",
+        "python scripts/check_raw_hash\\.py.*",
+        "python3 scripts/check_raw_hash\\.py.*",
+        "python scripts/list_claims\\.py.*",
+        "python3 scripts/list_claims\\.py.*",
+        "python scripts/compare_outputs\\.py.*",
+        "python3 scripts/compare_outputs\\.py.*",
+        "python \\-m pytest \\-q \\-p no:cacheprovider.*",
+        "python3 \\-m pytest \\-q \\-p no:cacheprovider.*"
+      ],
+      "deniedCommands": [
+        "git push.*",
+        "git tag.*",
+        "git remote.*",
+        "gh .*",
+        "curl .*",
+        "wget .*",
+        "git add.*",
+        "git commit.*",
+        "git reset.*",
+        "git checkout.*",
+        "git restore.*",
+        "git stash.*",
+        "git rm.*",
+        "git mv.*",
+        "git clean.*",
+        "git rebase.*",
+        "git merge.*",
+        "git switch.*",
+        "pip install.*",
+        "pip uninstall.*",
+        "ruff check \\-\\-fix.*",
+        "ruff format.*",
+        "git clone.*",
+        "rm .*"
+      ]
+    },
+    "read": {
+      "allowedPaths": [
+        "./**"
+      ],
+      "deniedPaths": [
+        "**/*.zip"
+      ]
+    }
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ],
+  "includeMcpJson": false,
+  "welcomeMessage": "Data validator: recomputes your numbers from the data. Report only."
+}

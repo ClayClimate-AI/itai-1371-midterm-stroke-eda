@@ -1,0 +1,39 @@
+# Install once per clone:  pre-commit install --hook-type pre-commit --hook-type commit-msg
+# Hooks run once at commit time; only the message check runs at the commit-msg stage.
+default_stages: [pre-commit]
+# Agent clones and notebook scratch are never checked or committed.
+exclude: "^(scratch|\\.nbrun)/"
+repos:
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.9.1
+    hooks:
+      - id: nbstripout
+        # Keep outputs and execution counts: Canvas graders must SEE the before/after plots
+        # in the committed .ipynb. nbstripout still removes noisy metadata for clean diffs.
+        args: ["--keep-output", "--keep-count"]
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.16.9
+    hooks:
+      - id: ruff-check
+        # Report only. Lint fixes in src/ and notebooks belong to the notebook-runner, and the
+        # repo-auditor (who commits agent work) must not change code (role matrix).
+        args: ["--no-fix"]
+  - repo: local
+    hooks:
+      - id: raw-data-hash-guard
+        name: raw data hash guard
+        entry: python scripts/check_raw_hash.py
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: pytest-fast
+        name: pytest fast
+        entry: python -m pytest -q -x tests
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: conventional-commit
+        name: conventional commit message
+        entry: python scripts/check_commit_msg.py
+        language: system
+        stages: [commit-msg]
