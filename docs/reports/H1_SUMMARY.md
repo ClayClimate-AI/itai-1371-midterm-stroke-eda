@@ -17,16 +17,16 @@ Written by the repo-auditor from the reports listed below. Facts only, no interp
 ## Approve or correct (Joseph ticks each line)
 | # | Item | Fact from the reports | Approve | Correct (what, in my words) |
 |---|---|---|---|---|
-| 1 | Fresh clone install | clone of 149de94, Python 3.14.6, new venv, `pip check`: "No broken requirements found.", `setup_gate.py`: "OK environment check passed" (repo-auditor) | [ ] | |
-| 2 | Raw data hash | `144ea5366832bb5432645c0e49fbb951aadf4ee1e75e73d2e15d3dc0841525bd` equals config and SHA256SUMS; `check_raw_hash.py`: "OK raw data hash unchanged" (data-validator, repo-auditor) | [ ] | |
-| 3 | Raw shape | `(5110, 12)`, 12 columns listed in the data-validator report | [ ] | |
-| 4 | Tests and lint | pytest `16 passed, 49 skipped`; ruff `All checks passed!` (repo-auditor) | [ ] | |
-| 5 | D1 split | card "Option I chose: A", signed 10/04/2026 9:49 AM (CT); config `SPLIT_SEED = 33`, `STRATIFY_ON = None`, `TEST_SIZE = 0.30` (data-validator, work-verifier, repo-auditor) | [ ] | |
-| 6 | D2 to D8 | deferred to H2 by Joseph (GATES.md H1 row); Signed lines blank; config slots unchanged since scaffold (work-verifier #4) | [ ] | |
-| 7 | A2.5 cards before code | D1 committed in 149de94; 0 notebook commits in history (repo-auditor) | [ ] | |
-| 8 | Split and final files | none in `data/interim` or `data/processed` (only `.gitkeep`) (data-validator) | [ ] | |
-| 9 | Secrets, junk, large files, reference material | none found in 90 tracked files; largest file 327451 bytes (repo-auditor) | [ ] | |
-| 10 | Deliverables | `check_deliverables.py`: 9 MISSING (notebooks 01 to 04, proposal PDF, two journal PDFs, final and test CSVs); `docs/dataset_url.md` present (repo-auditor) | [ ] | |
+| 1 | Fresh clone install | clone of 149de94, Python 3.14.6, new venv, `pip check`: "No broken requirements found.", `setup_gate.py`: "OK environment check passed" (repo-auditor) | [x] | |
+| 2 | Raw data hash | `144ea5366832bb5432645c0e49fbb951aadf4ee1e75e73d2e15d3dc0841525bd` equals config and SHA256SUMS; `check_raw_hash.py`: "OK raw data hash unchanged" (data-validator, repo-auditor) | [x] | |
+| 3 | Raw shape | `(5110, 12)`, 12 columns listed in the data-validator report | [x] | |
+| 4 | Tests and lint | pytest `16 passed, 49 skipped`; ruff `All checks passed!` (repo-auditor) | [x] | |
+| 5 | D1 split | card "Option I chose: A", signed 10/04/2026 9:49 AM (CT); config `SPLIT_SEED = 33`, `STRATIFY_ON = None`, `TEST_SIZE = 0.30` (data-validator, work-verifier, repo-auditor) | [x] | |
+| 6 | D2 to D8 | deferred to H2 by Joseph (GATES.md H1 row); Signed lines blank; config slots unchanged since scaffold (work-verifier #4) | [x] | |
+| 7 | A2.5 cards before code | D1 committed in 149de94; 0 notebook commits in history (repo-auditor) | [x] | |
+| 8 | Split and final files | none in `data/interim` or `data/processed` (only `.gitkeep`) (data-validator) | [x] | |
+| 9 | Secrets, junk, large files, reference material | none found in 90 tracked files; largest file 327451 bytes (repo-auditor) | [x] | |
+| 10 | Deliverables | `check_deliverables.py`: 9 MISSING (notebooks 01 to 04, proposal PDF, two journal PDFs, final and test CSVs); `docs/dataset_url.md` present (repo-auditor) | [x] | |
 
 ## Verifier (pasted verbatim from the work-verifier report)
 <!-- VERIFIER SECTION START -->
