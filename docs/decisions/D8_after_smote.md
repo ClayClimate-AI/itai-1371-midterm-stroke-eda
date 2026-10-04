@@ -63,15 +63,22 @@ the flag skip unless it is True.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
-* **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
-* **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `REPAIR_RULE`, `NUMERIC_CHECK`, `FINAL_NUMERIC_UNITS`, `FLAG_SYNTHETIC`; blank until you sign):
-* **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+* **Option I chose:** Repair: A, round 0/1 columns at 0.5 and use argmax for each one hot group, then count the changes. Numeric check: C, both the range check and the distribution comparison. Final file: numbers stay scaled, work_type is one hot, no row key (id dropped in D2), and an `is_synthetic` column marks SMOTE rows (option A).
 
+* **Why, in my words:**
+  SMOTE blends numbers, so a synthetic row can come out "0.4 hypertensive" or with two half ticks in one group. No real patient looks like that. Rounding and argmax make every row valid, and I print how many values changed so the repair isn't hidden. For the numbers, the range check gives a clear pass or fail (each value inside its work_type's real min and max), and the histograms show whether the shape looks real, so I do both. I keep the numbers scaled so the file is ready for the models in the Final (Canvas GL9), and the train fitted scaler can convert them back anytime. `is_synthetic` lets the Final train or evaluate with or without the synthetic rows. Test is transformed with train fitted objects only, never balanced, and has the same columns.
+
+* **Source:** Canvas S8 and GL9; D8 card; D7 SMOTE setup
+
+* **Evidence** (added at H3: notebook name and cell number, chart, report file):
+
+* **What I will watch for:** Repair changes generated values, so the change counts must be printed. The range check needs real units, so values are converted with `inverse_transform` first. `is_synthetic` isn't a patient measurement, so it has to be dropped or handled before modeling.
+
+* **Value set in `src/stroke_prep/config.py`:** `REPAIR_RULE = "A"`, `NUMERIC_CHECK = "C"`, `FINAL_NUMERIC_UNITS = "scaled"`, `FLAG_SYNTHETIC = True`
+
+* **ADR:** `docs/adr/____-________.md`
+
+* **Signed:** Joseph Clay, 10/04/2026 3:34 PM (CT)
 ## Review at H3 (Joseph)
 
 * [ ] Keep as decided   [ ] Amend (new option, and why, in my words):

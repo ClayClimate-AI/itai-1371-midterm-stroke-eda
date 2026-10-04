@@ -43,14 +43,22 @@ False for A or C). The one hot group test reads it.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** A, full one hot with `OneHotEncoder(handle_unknown="ignore")`. work_type stays a text label during SMOTE (it is y) and gets one hot encoded after SMOTE.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  None of the five text columns has a natural order. Numbering them 1, 2, 3 would invent one (as if "smokes" were bigger than "never smoked"), and SMOTE would read those gaps as real distances. Full one hot gives each category its own 0/1 column, and the rule is easy to check and repair: exactly one 1 per group. I don't drop a column per group, because "exactly one 1" is simpler to check after SMOTE than "at most one 1". work_type is the column SMOTE balances, so it stays a label during SMOTE and is encoded afterwards so the final file is all numbers.
+
+* **Source:** Canvas P5 and P6; D4 card; scikit-learn OneHotEncoder documentation; category counts in notebooks/02_eda_train.ipynb
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `ONEHOT_DROP_FIRST`; blank until you sign):
+
+* **What I will watch for:** More columns, and each group always adds up to 1, which matters for some linear models in the Final. Train and test must end up with the same column names in the same order.
+
+* **Value set in `src/stroke_prep/config.py`:** `ONEHOT_DROP_FIRST = False`
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:30 PM (CT)
 
 ## Review at H3 (Joseph)
 

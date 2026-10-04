@@ -39,14 +39,22 @@ your H3 summary. At H3 you keep or amend the decision.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** Plain `SMOTE`. y = work_type. stroke rides along in X (option a). `k_neighbors = 5` (library default). `sampling_strategy = "auto"`. `random_state = 33`.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  Prof Rao fixed SMOTE and work_type, and plain SMOTE is the basic method, so there's no variant to justify. My smallest work_type group in train is Never_worked with 13 rows. k has to be below that, so the default of 5 works. "auto" grows every smaller group to the size of the largest group (Private), which is the simplest to explain. random_state 33 matches my split seed so the run repeats, and I won't change it after seeing results. stroke rides along in X like any other 0/1 column and gets repaired in D8.
+
+* **Source:** Prof Rao in class, Oct 1, 2026; Canvas P4; D7 card; imbalanced-learn SMOTE documentation; work_type counts in notebooks/02_eda_train.ipynb
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `SMOTE_VARIANT`, `SMOTE_K_NEIGHBORS`, `SMOTE_SAMPLING_STRATEGY`, `SMOTE_RANDOM_STATE`; blank until you sign):
+
+* **What I will watch for:** Never_worked grows from 13 rows to about 2,040, so about 99% of that group will be synthetic, made from only 13 real rows. I'll compare its synthetic rows against the real ones. Synthetic stroke values come out blended and must be rounded back to 0/1. The real rows must come back unchanged.
+
+* **Value set in `src/stroke_prep/config.py`:** `SMOTE_VARIANT = "SMOTE"`, `SMOTE_K_NEIGHBORS = 5`, `SMOTE_SAMPLING_STRATEGY = "auto"`, `SMOTE_RANDOM_STATE = 33`
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:33PM (CT)
 
 ## Review at H3 (Joseph)
 

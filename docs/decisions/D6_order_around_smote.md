@@ -48,14 +48,22 @@ train only.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** A, fill, encode and scale, then plain SMOTE.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  Plain SMOTE needs every column to be a number with no blanks, and it picks neighbors by distance. So bmi has to be filled, the text columns encoded, and the three number columns scaled before SMOTE runs, which puts every column on a similar ruler. This follows Prof Rao's Oct 1 guidance to balance work_type with SMOTE. Every fill value, encoder and scaler is fit on train only, and SMOTE runs on train only.
+
+* **Source:** Prof Rao in class, Oct 1, 2026; Canvas P4; D6 card; imbalanced-learn SMOTE documentation
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (if any):
+
+* **What I will watch for:** SMOTE will create in between values in the 0/1 and one hot columns (like 0.4 for hypertension), which D8 repairs. The scaler describes real train rows only, because it is fit before SMOTE. Test goes through the same train fitted steps and is never balanced.
+
+* **Value set in `src/stroke_prep/config.py`:** none (D6 has no slot)
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:32PM (CT)
 
 ## Review at H3 (Joseph)
 

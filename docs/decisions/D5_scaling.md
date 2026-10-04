@@ -43,14 +43,22 @@ Write why for each.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** A, `StandardScaler` on age, avg_glucose_level and bmi. 0/1 and one hot columns are not scaled. MinMaxScaler is shown in the notebook as the normalization exercise (Canvas P3), but the final file uses StandardScaler.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  The three number columns use very different rulers: age 0.08 to 82, glucose 55.12 to 267.76, bmi 11.3 to 97.6. SMOTE measures distance, so without scaling glucose would count the most just because its numbers are bigger. StandardScaler puts each one on mean 0 and standard deviation 1, learned from train only, and keeps the shape of each distribution. The 0/1 columns already sit between 0 and 1, so I leave them alone and they stay 0/1.
+
+* **Source:** Canvas P2 and P3; D5 card; scikit-learn StandardScaler and MinMaxScaler documentation; number column summaries in notebooks/02_eda_train.ipynb
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `SCALER`, `SCALE_COLUMNS`; blank until you sign):
+
+* **What I will watch for:** Glucose's long right tail and bmi's extreme high value pull the mean and standard deviation. Scaled values are z scores, so I keep the fitted scaler to convert back to real units for charts and range checks. Test values outside the train range are expected, not an error.
+
+* **Value set in `src/stroke_prep/config.py`:** `SCALER = "StandardScaler"`, `SCALE_COLUMNS = ["age", "avg_glucose_level", "bmi"]`
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:31PM (CT)
 
 ## Review at H3 (Joseph)
 

@@ -41,28 +41,28 @@ SPLIT_SEED: int | None = 33          # D1
 STRATIFY_ON: str | list[str] | None = None   # D1 (None is also a valid choice: write it in D1)
 
 # D3 missing values: docs/decisions/D3_missing_values.md
-IMPUTE_STRATEGY: str | None = None     # D3 fill option, in the card's words, e.g. the option letter
-ADD_MISSING_FLAG: bool | None = None   # D3 True if you add a 0/1 missing flag before filling
+IMPUTE_STRATEGY: str | None = "median"  # D3 fill option, in the card's words
+ADD_MISSING_FLAG: bool | None = True   # D3 True if you add a 0/1 missing flag before filling
 
 # D4 encoding: docs/decisions/D4_encoding.md
-ONEHOT_DROP_FIRST: bool | None = None  # D4: True if you drop one column per one hot group
+ONEHOT_DROP_FIRST: bool | None = False  # D4: True if you drop one column per one hot group
 
 # D5 scaling: docs/decisions/D5_scaling.md
-SCALER: str | None = None              # D5 method name as written on the card
-SCALE_COLUMNS: list[str] | None = None  # D5 column names you chose to scale
+SCALER: str | None = "StandardScaler"              # D5 method name as written on the card
+SCALE_COLUMNS: list[str] | None = ["age", "avg_glucose_level", "bmi"]  # D5 columns to scale
 
 # D7 SMOTE setup: docs/decisions/D7_smote_setup.md (Prof Rao fixed SMOTE on work_type)
-SMOTE_VARIANT: str | None = None       # D7 "SMOTE" or the variant named on the card
-SMOTE_K_NEIGHBORS: int | None = None   # D7 k_neighbors; must be below the smallest work_type
+SMOTE_VARIANT: str | None = "SMOTE"       # D7 "SMOTE" or the variant named on the card
+SMOTE_K_NEIGHBORS: int | None = 5   # D7 k_neighbors; must be below the smallest work_type
                                        #    group in train (the test checks this once set)
-SMOTE_SAMPLING_STRATEGY: str | dict[str, int] | None = None  # D7 "auto" or a dict of counts
-SMOTE_RANDOM_STATE: int | None = None  # D7 random_state; never change it after seeing results
+SMOTE_SAMPLING_STRATEGY: str | dict[str, int] | None = "auto"  # D7 "auto" or a dict of counts
+SMOTE_RANDOM_STATE: int | None = 33  # D7 random_state; never change it after seeing results
 
 # D8 after SMOTE: docs/decisions/D8_after_smote.md
-REPAIR_RULE: str | None = None         # D8 repair option for 0/1 and one hot columns
-NUMERIC_CHECK: str | None = None       # D8 numeric check option
-FINAL_NUMERIC_UNITS: str | None = None  # D8 "scaled" or "real" units in the final file
-FLAG_SYNTHETIC: bool | None = None     # D8 True if you add a 0/1 column marking SMOTE rows
+REPAIR_RULE: str | None = "A"         # D8 repair option for 0/1 and one hot columns
+NUMERIC_CHECK: str | None = "C"       # D8 numeric check option
+FINAL_NUMERIC_UNITS: str | None = "scaled"  # D8 "scaled" or "real" units in the final file
+FLAG_SYNTHETIC: bool | None = True     # D8 True if you add a 0/1 column marking SMOTE rows
 
 # One list so tests and the checkpoint summary can report which slots are still blank.
 DECISION_SLOTS: dict[str, str] = {

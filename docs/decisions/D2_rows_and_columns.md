@@ -52,14 +52,22 @@ a value it did not see in train (for example `OneHotEncoder(handle_unknown="igno
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** Rare value: A, remove the gender "Other" row from train. id: A, drop it before any modeling step.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  My train EDA shows gender has only 1 "Other" row out of 3,577. One row can't teach a model anything, and keeping it would add a column that is 0 in every other row. Removing it costs 0.03% of train. The id column is a unique label (3,577 different ids in 3,577 rows), not a fact about the patient. If it stayed, SMOTE and the scaler would read it as a real number and use it to measure distance, so I drop it before any modeling step. Both changes are made with Python code in the notebook, never by hand (Canvas GL4).
+
+* **Source:** Canvas GL2 and GL4; D2 card; train EDA in notebooks/02_eda_train.ipynb (gender counts) and notebooks/01_load_split.ipynb (id check); scikit-learn OneHotEncoder documentation (handle_unknown)
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (if any):
+
+* **What I will watch for:** The test set could still hold an "Other" value. The encoder uses `handle_unknown="ignore"`, so that row gets all zeros in the gender group instead of crashing. Once id is dropped, processed rows can't be traced back to the raw file.
+
+* **Value set in `src/stroke_prep/config.py`:** none (D2 has no slot; the row removal and id drop are code in notebook 03)
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:22PM (CT)
 
 ## Review at H3 (Joseph)
 

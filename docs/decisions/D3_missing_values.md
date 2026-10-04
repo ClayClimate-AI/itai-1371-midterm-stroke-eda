@@ -50,14 +50,22 @@ your H3 summary. At H3 you keep or amend the decision.
 
 ## My decision (Joseph fills this in at H1, in his own words)
 
-* **Option I chose:**
+* **Option I chose:** Fill: A, train median. Flag: A, add a 0/1 `bmi_missing` column before filling.
+
 * **Why, in my words:**
-* **Source** (module or lecture, documentation page, or Prof Rao with date):
+  bmi is the only column with blanks: 138 in train (3.9%). bmi has an extreme high value (max 97.6) that pulls the mean, so the median (28.1) is a safer middle value. The median is learned from train only and applied to test unchanged. I add `bmi_missing` before filling so the fact that a value was blank isn't lost, which also counts as feature engineering (Canvas P7). smoking_status "Unknown" (1,082 rows, 30%) is not a blank in the file. It's a real answer, so I keep it as its own category and encode it in D4 instead of filling it.
+
+* **Source:** Canvas P1 and P7; D3 card; train EDA in notebooks/02_eda_train.ipynb (missing values cell, bmi histogram); scikit-learn SimpleImputer documentation
+
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
-* **What I will watch for** (a risk this choice brings):
-* **Value set in `src/stroke_prep/config.py`** (slots `IMPUTE_STRATEGY`, `ADD_MISSING_FLAG`; blank until you sign):
+
+* **What I will watch for:** All 138 filled rows get the same value, which narrows bmi's spread a little. `bmi_missing` has to stay 0/1 after SMOTE (the D8 repair handles that). No blanks can remain after this step.
+
+* **Value set in `src/stroke_prep/config.py`:** `IMPUTE_STRATEGY = "median"`, `ADD_MISSING_FLAG = True`
+
 * **ADR:** `docs/adr/____-________.md`
-* **Signed:** Joseph Clay, date and time (CT):
+
+* **Signed:** Joseph Clay, 10/04/2026 3:26PM (CT)
 
 ## Review at H3 (Joseph)
 
