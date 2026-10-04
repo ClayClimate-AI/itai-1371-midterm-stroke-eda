@@ -52,12 +52,12 @@ Do this before any EDA, and look only at shares, not at relationships between co
 
 * **Value set in `src/stroke_prep/config.py`:** `SPLIT_SEED = 33`, `STRATIFY_ON = None`
 
-* **ADR:** `docs/adr/____-________.md`
+* **ADR:** `docs/adr/0001-d1-split-plain-random-70-30.md`
 
 * **Signed:** Joseph Clay, 10/04/2026 9:49 AM (CT)
 
 ## Review at H2 (Joseph)
 
-* [ ] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H2 evidence I looked at:**
-* **Signed:** Joseph Clay, date and time (CT):
+* [x] Keep as decided   [ ] Amend (new option, and why, in my words):
+* **What in the H2 evidence I looked at:** Notebook 01 split checks (rows add up, no id in both parts, every work_type group in both parts, same seed gives the same train ids) and the shares table: stroke 4.7% in train vs 5.28% in test, Never_worked 13 rows in train. The shares differ a little by chance, as the card warned, but every group is in both parts, so I keep option A.
+* **Signed:** Joseph Clay, 10/04/2026 3:55PM (CT)
