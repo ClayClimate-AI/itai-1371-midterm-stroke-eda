@@ -41,6 +41,8 @@ your H3 summary. At H3 you keep or amend the decision.
 
 * **Option I chose:** Plain `SMOTE`. y = work_type. stroke rides along in X (option a). `k_neighbors = 5` (library default). `sampling_strategy = "auto"`. `random_state = 33`.
 
+* **Column types going in:** cast to float first, so blended 0/1 values reach the D8 repair and are rounded at 0.5 instead of being cut off (0.76 would become 0 as loaded). Added 10/04/2026 4:46 PM (CT) after the H3 build escalation.
+
 * **Why, in my words:**
   Prof Rao fixed SMOTE and work_type, and plain SMOTE is the basic method, so there's no variant to justify. My smallest work_type group in train is Never_worked with 13 rows. k has to be below that, so the default of 5 works. "auto" grows every smaller group to the size of the largest group (Private), which is the simplest to explain. random_state 33 matches my split seed so the run repeats, and I won't change it after seeing results. stroke rides along in X like any other 0/1 column and gets repaired in D8.
 

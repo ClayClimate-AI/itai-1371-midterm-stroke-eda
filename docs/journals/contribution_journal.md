@@ -1,73 +1,63 @@
 # Contribution journal (Canvas item 7)
 
-> TEMPLATE. Write every answer in your own words, then export to
-> `docs/MTJournal_C_JosephClay_ITAI1371.pdf`. The tutor-reviewer may review for gaps and
-> clarity; nobody else writes this for you.
-
 **Canvas S7:** "Upload detailed proposal (reflection journal) of what you accomplished; each team member talks about contribution in the contribution journal"
 **Canvas R4:** "Individual contribution: no entry minus 20, no participation minus 100"
 
 ## 1. My role
 
-* [fill: one sentence about your role on this project, in your words]
+* This project was conducted individually. I carried out each method decision, reviewed and signed each checkpoint, wrote my interpretation, and directed, collaborated and asked clarifying question(tutor-reviewer-agent) with AI agents that implemented., ran and checked the codebase.
 
 ## 2. What I did, with proof
 
 | Deliverable | What I did | Proof (file and commit hash) |
 |---|---|---|
-| 1 dataset URL document | [fill] | [fill] |
-| 2 one page proposal | [fill] | [fill] |
-| 3 split notebook | [fill] | [fill] |
-| 4 EDA on train only | [fill] | [fill] |
-| 5 before and after notebooks | [fill] | [fill] |
-| 6 .ipynb files | [fill] | [fill] |
-| 7 journals | [fill] | [fill] |
-| 8 final clean dataset | [fill] | [fill] |
+| 1 dataset URL document | Recorded the Kaggle source and URL for the stroke dataset | `docs/dataset_url.md`, [fill hash] |
+| 2 one page proposal | [fill at H4] | `docs/MT_JosephClay_ITAI1371_Proposal.pdf`, [fill at H4] |
+| 3 split notebook | Chose and signed the 70/30 split (D1: plain random, seed 33), then reviewed the split checks | `notebooks/01_load_split.ipynb`, D1 card 149de94, notebook 5f0abd5 |
+| 4 EDA on train only | Wrote the observation under every chart and the findings cell, then fixed 3 points the data validator raised | `notebooks/02_eda_train.ipynb`, [fill hash of "EDA observations" commit], fixes c17a968 |
+| 5 before and after notebooks | [fill at H3] | `notebooks/03_preprocess_before_after.ipynb`, `notebooks/04_smote_balance.ipynb`, [fill at H3] |
+| 6 .ipynb files | Reviewed each notebook at its checkpoint | `notebooks/`, H1 78e6825, H2 ea395d1 |
+| 7 journals | Wrote both journals | `docs/MTJournal_C_JosephClay_ITAI1371.pdf`, `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, [fill at H4] |
+| 8 final clean dataset | [fill at H3] | `data/processed/stroke_clean_final.csv`, [fill at H3] |
 
 ## 3. Decisions I made
 
 | Card | My choice (short) | ADR |
 |---|---|---|
-| D1 split | [fill] | [fill] |
-| D2 rows and columns | [fill] | [fill] |
-| D3 missing values | [fill] | [fill] |
-| D4 encoding | [fill] | [fill] |
-| D5 scaling and normalization | [fill] | [fill] |
-| D6 order around SMOTE | [fill] | [fill] |
-| D7 SMOTE setup | [fill] | [fill] |
-| D8 after SMOTE and final file | [fill] | [fill] |
+| D1 split | A: plain random 70/30, seed 33, no stratify | `docs/adr/0001-d1-split-plain-random-70-30.md` |
+| D2 rows and columns | Remove the 1 gender "Other" row from train; drop id before modeling | [fill at H3] |
+| D3 missing values | Fill bmi with the train median (28.1); add a `bmi_missing` flag first; keep smoking "Unknown" as a category | [fill at H3] |
+| D4 encoding | Full one hot with handle_unknown ignore; work_type encoded after SMOTE | [fill at H3] |
+| D5 scaling and normalization | StandardScaler on age, glucose and bmi; MinMax shown as the normalization exercise | [fill at H3] |
+| D6 order around SMOTE | Fill, encode, scale, then plain SMOTE | [fill at H3] |
+| D7 SMOTE setup | Plain SMOTE on work_type, k 5, "auto", random_state 33, columns cast to float first | [fill at H3] |
+| D8 after SMOTE and final file | Round 0/1 and argmax repair, both numeric checks, scaled units, `is_synthetic` flag | [fill at H3] |
 
 ## 4. AI use disclosure
 
-**Tools used:** [fill: for example Claude Code or Kiro CLI, with the five project subagents
-(notebook-runner, data-validator, work-verifier, repo-auditor, tutor-reviewer) listed in
-`.claude/agents/` and `.kiro/agents/`]
+**Tools used:** Kiro CLI with a builder agent and the five project subagents (notebook-runner, data-validator, work-verifier, repo-auditor, tutor-reviewer). I also used an AI assistant (Grok Bot) to explain concepts and options.
 
 **What AI did:**
-* Claude wrote the Python code (notebook cells, functions) from the decisions I signed on the
-  decision cards. [fill: edit this so it matches what really happened]
-* Between my four checkpoints, the notebook-runner, data-validator, work-verifier and
-  repo-auditor subagents ran the notebooks, checked them and each other, fixed mechanical
-  problems on their own (logged in `docs/reports/RUN_LOG.md`) and wrote reports and a one page
-  summary for each checkpoint.
-  [fill: edit or remove; mention any escalation they brought to you]
-* The tutor-reviewer explained concepts and asked me questions. [fill: edit or remove]
+* The Kiro builder agent wrote the Python code (notebook cells and functions) from the decisions I signed on the decision cards, and drafted the ADRs from those cards for me to review and save.
+* Between my checkpoints, the notebook-runner, data-validator, work-verifier and repo-auditor ran the notebooks, checked them and each other, and wrote a one page summary for each checkpoint. At H2 they flagged two items for me: the builder read one file outside the project folder (a kernel settings file), and notebook 01 prints test shares. I kept the test shares because the D1 card's checks require them.
+* At H3 the builder stopped and escalated because it had chosen a SMOTE input setting (cast to float first) that my D7 card left open. I reviewed both options and signed float first, so blended 0/1 values get rounded at 0.5 instead of being cut off.
+* The tutor-reviewer explained concepts, like how a random seed works, and asked me questions.
+* The AI assistant explained each data chart, recommended an option for D2 to D8 with pros and cons, and drafted the wording of my EDA observations and decision card text from the numbers in my notebooks.
 
-**What I did:** [fill: every method decision and its review, approving or correcting each
-checkpoint summary, every interpretation, the ADRs, both journals, the proposal, the README text,
-my commits and every push]
+**What I did:** I chose and signed every decision card, approved or corrected each checkpoint summary, reviewed and edited every observation and card before saving it, set the decision values in config.py, saved the ADRs, wrote both journals and the proposal, and made my own commits, pushes and checkpoint tags.
 
-**How I checked AI output:** [fill: one or two real examples, including one where you caught a
-problem]
+**How I checked AI output:**
+* The data-validator rechecked 84 claims in my EDA notes. It found 0 wrong but 3 that needed fixing: a vague bullet about id, a reference to "box 6" that didn't match any label, and a notebook title hidden by an HTML comment. I fixed all three (c17a968).
+* When I filled in config.py, the ruff check stopped my commit because two lines were too long. I shortened them, and the decision slot tests passed 15 of 15 (ccc2dc4).
 
-**Starter materials note (edit this in your own words, keep it honest):**
-> [fill] The starter materials I first received included reference results that an AI assistant
-> had produced ahead of time. Those results were removed from the starter materials before I
-> began this work, and I did not open the separate copy of those reference results. Every number,
-> decision and conclusion in this repository comes from my own run of the notebooks.
+**Learning and preparation note:**
+* Before building, I used a reference website as an all inclusive guide to understand the new concepts, mapped against the assignment criteria and made to fit my learning style. With that understanding, I built my own repo, made and signed every decision, and ran every notebook individually, so every number, decision and conclusion here comes from my own run. This project was also my chance to apply multi agent orchestration, which I learned from that reference, and I count it as part of my learning process and individual contribution.
 
 ## 5. Time log (optional)
 
 | Date | Checkpoint | Hours | What |
 |---|---|---|---|
-| | | | |
+| 10/04/2026 | H1 | [fill] | Setup review, D1 split decision, H1 sign off |
+| 10/04/2026 | H2 | [fill] | EDA observations, D2 to D8 decisions, ADR 0001, H2 sign off |
+| 10/04/2026 | H3 | [fill] | |
+| 10/04/2026 | H4 | [fill] | |
