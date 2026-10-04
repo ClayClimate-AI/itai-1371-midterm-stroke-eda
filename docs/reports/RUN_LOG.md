@@ -324,3 +324,58 @@ Change:  none to code or data; .gitignore unchanged
 Rule:    n/a (no escalations)
 Commit:  feat(agent): build and run notebooks 03 and 04, H3 reports  [H3]
 ```
+
+```text
+#28  2026-10-04 18:50 CT  builder  since H3 (a126aa1, H3-signed)
+Type:    BUILD
+What:    notebooks/04_smote_balance.ipynb: new code cell id 92cda166 "# Before and after chart: stroke share within each work_type, real rows vs all rows after SMOTE" (table + Matplotlib bar chart) and new empty placeholder id 2d4decbd "[Joseph writes here at H4]"
+Why:     Joseph's request in chat (H4 prep): stroke share within each work_type, real rows only and after SMOTE
+Files:   notebooks/04_smote_balance.ipynb
+Change:  29 -> 30 code cells, 15 -> 16 markdown cells; no existing cell source changed
+Rule:    n/a
+Commit:  see #32
+```
+
+```text
+#29  2026-10-04 18:54 CT  notebook-runner  since H3 (a126aa1, H3-signed)
+Type:    RERUN
+What:    nb04 rerun PASS: counts 1..30 no gaps, 0 errors; 29 HEAD code cells 0 differ (compare_outputs on rerun minus new cell); 15 HEAD markdown cells identical; 4 data file SHA-256 unchanged; pytest 64 passed 1 skipped; ruff clean; no mechanical fixes
+Why:     rerun after builder BUILD #28
+Files:   docs/reports/notebook-runner/H4_20261004_1854.md, notebooks/04_smote_balance.ipynb
+Change:  none to code or data handling
+Rule:    n/a (E1 logged as #30)
+Commit:  see #32
+```
+
+```text
+#30  2026-10-04 18:54 CT  notebook-runner  since H3 (a126aa1, H3-signed)
+Type:    ESCALATION
+What:    E1: new cell 92cda166 and placeholder 2d4decbd were placed between the 0/1 shares chart and Joseph's H3 note on that chart
+Why:     placement next to interpretation text is outside the runner's lane
+Files:   docs/reports/notebook-runner/H4_20261004_1854.md, notebooks/04_smote_balance.ipynb
+Change:  resolved by the builder (#31): both cells moved to after Joseph's H3 note; no output change. Joseph may still ask for a different position
+Rule:    interpretation text (placement)
+Commit:  see #32
+```
+
+```text
+#31  2026-10-04 18:56 CT  builder  since H3 (a126aa1, H3-signed)
+Type:    BUILD (structural move, no source or output change)
+What:    moved cells 92cda166 and 2d4decbd after Joseph's H3 note; 1-based order now 23 shares chart, 24 Joseph's note, 25 new cell, 26 placeholder, 27 "## D8 Numeric check" heading; builder pytest 64 passed 1 skipped
+Why:     resolve E1 (#30)
+Files:   notebooks/04_smote_balance.ipynb
+Change:  cell position only; repo-auditor check: order as stated, counts 1..30 no gaps, 0 error/stderr outputs, 15 HEAD markdown cells byte identical and in order, 29 HEAD code cells source and outputs identical, new cell table identical to the runner's quote, raw hash OK, pytest 64 passed 1 skipped, ruff check src notebooks clean
+Rule:    n/a
+Commit:  see #32
+```
+
+```text
+#32  2026-10-04 18:58 CT  repo-auditor  since H3 (a126aa1, H3-signed)
+Type:    RERUN (pre-commit checks, working copy, read only)
+What:    verified #28 to #31 and committed nb04, runner report H4_20261004_1854 and this log
+Why:     H4 prep: log and commit Joseph's requested cell
+Files:   docs/reports/repo-auditor/H4_20261004_1856_commit.md, docs/reports/RUN_LOG.md
+Change:  none to code or data
+Rule:    n/a
+Commit:  feat(agent): stroke share by work_type cell in notebook 04  [H4] (hash in git log and the repo-auditor reply)
+```
