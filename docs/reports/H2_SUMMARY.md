@@ -17,21 +17,21 @@ Written by the repo-auditor from the reports listed below. Facts only, no interp
 ## Approve or correct (Joseph ticks each line)
 | # | Item | Fact from the reports | Approve | Correct (what, in my words) |
 |---|---|---|---|---|
-| 1 | Split rows | raw (5110, 12); train (3577, 12); test (1533, 12); 3577 + 1533 = 5110; shared ids 0; every raw id in exactly one part (data-validator §1, verifier spot checks) | [ ] | |
-| 2 | Split rows are raw rows | `DataFrame.equals` True for train and test vs raw by id; dtypes equal (data-validator §1) | [ ] | |
-| 3 | Card D1 vs notebook 01 | card option A; config and nb01 output `TEST_SIZE: 0.3 / SPLIT_SEED: 33 / STRATIFY_ON: None`; verifier's own `train_test_split(..., 0.30, 33)` gives the saved train ids (data-validator §3, verifier #9) | [ ] | |
-| 4 | Card D1 "how to test" outputs | quoted from nb01 in data-validator §3: stroke shares, work_type shares, rows add up, every work_type group in both parts, same seed same ids, raw hash matches | [ ] | |
-| 5 | Split once | nb01 splits once; re-split cell is the repeatability check and saves nothing; save cell compares ids instead of overwriting (verifier #10) | [ ] | |
-| 6 | Train only (notebook 02) | nb02 reads only `config.TRAIN_RAW`, never names the test file; `test_eda_notebook_reads_train_only` PASSED; no fit-like calls in nb01, nb02, pipeline.py (data-validator §2, verifier #13) | [ ] | |
-| 7 | Notebook 02 charts | 14 PNGs: missing values 1, stroke and work_type shares 2, text columns 5 bar, 0/1 columns 3 bar, number columns 3 histograms; titles and axis labels set (verifier #14) | [ ] | |
-| 8 | No D2 to D8 code | `fit_prep`, `transform`, `balance`, `repair_after_balance` still `NotImplementedError` (verifier #4, data-validator §2) | [ ] | |
-| 9 | D2 to D8 card check outputs (train only) | raw outputs in data-validator §4; steps needing a blank decision or test data marked NOT CHECKABLE | [ ] | |
-| 10 | Claims list | `list_claims.py`: 94 sentences, all kit text, headings, quotes or dates; claims checked 0 (no Joseph prose yet) (data-validator §0) | [ ] | |
-| 11 | Reproducibility | clone reruns: `0 of 17` and `0 of 24` code cells differ; split file SHA-256 identical to working copy (repo-auditor, verifier) | [ ] | |
-| 12 | Tests, lint, notebooks | pytest `31 passed, 34 skipped`; ruff `All checks passed!` on src, tests, scripts, notebooks; counts 1..17 and 1..24, 0 errors (repo-auditor) | [ ] | |
-| 13 | A2.5 | D1 committed in 149de94 (10:46 CT) before any notebook commit; D2 to D8 deferred to H2 by Joseph, checked against notebooks 03 and 04 (repo-auditor) | [ ] | |
-| 14 | Secrets, junk, large files, reference material | none; largest new file 328748 bytes (repo-auditor) | [ ] | |
-| 15 | Deliverables | `check_deliverables.py`: 7 MISSING (proposal PDF, notebooks 03 and 04, two journal PDFs, final and test CSVs); S3 and S4 present (repo-auditor) | [ ] | |
+| 1 | Split rows | raw (5110, 12); train (3577, 12); test (1533, 12); 3577 + 1533 = 5110; shared ids 0; every raw id in exactly one part (data-validator §1, verifier spot checks) | [x] | |
+| 2 | Split rows are raw rows | `DataFrame.equals` True for train and test vs raw by id; dtypes equal (data-validator §1) | [x] | |
+| 3 | Card D1 vs notebook 01 | card option A; config and nb01 output `TEST_SIZE: 0.3 / SPLIT_SEED: 33 / STRATIFY_ON: None`; verifier's own `train_test_split(..., 0.30, 33)` gives the saved train ids (data-validator §3, verifier #9) | [x] | |
+| 4 | Card D1 "how to test" outputs | quoted from nb01 in data-validator §3: stroke shares, work_type shares, rows add up, every work_type group in both parts, same seed same ids, raw hash matches | [x] | |
+| 5 | Split once | nb01 splits once; re-split cell is the repeatability check and saves nothing; save cell compares ids instead of overwriting (verifier #10) | [x] | |
+| 6 | Train only (notebook 02) | nb02 reads only `config.TRAIN_RAW`, never names the test file; `test_eda_notebook_reads_train_only` PASSED; no fit-like calls in nb01, nb02, pipeline.py (data-validator §2, verifier #13) | [x] | |
+| 7 | Notebook 02 charts | 14 PNGs: missing values 1, stroke and work_type shares 2, text columns 5 bar, 0/1 columns 3 bar, number columns 3 histograms; titles and axis labels set (verifier #14) | [x] | |
+| 8 | No D2 to D8 code | `fit_prep`, `transform`, `balance`, `repair_after_balance` still `NotImplementedError` (verifier #4, data-validator §2) | [x] | |
+| 9 | D2 to D8 card check outputs (train only) | raw outputs in data-validator §4; steps needing a blank decision or test data marked NOT CHECKABLE | [x] | |
+| 10 | Claims list | `list_claims.py`: 94 sentences, all kit text, headings, quotes or dates; claims checked 0 (no Joseph prose yet) (data-validator §0) | [x] | |
+| 11 | Reproducibility | clone reruns: `0 of 17` and `0 of 24` code cells differ; split file SHA-256 identical to working copy (repo-auditor, verifier) | [x] | |
+| 12 | Tests, lint, notebooks | pytest `31 passed, 34 skipped`; ruff `All checks passed!` on src, tests, scripts, notebooks; counts 1..17 and 1..24, 0 errors (repo-auditor) | [x] | |
+| 13 | A2.5 | D1 committed in 149de94 (10:46 CT) before any notebook commit; D2 to D8 deferred to H2 by Joseph, checked against notebooks 03 and 04 (repo-auditor) | [x] | |
+| 14 | Secrets, junk, large files, reference material | none; largest new file 328748 bytes (repo-auditor) | [x] | |
+| 15 | Deliverables | `check_deliverables.py`: 7 MISSING (proposal PDF, notebooks 03 and 04, two journal PDFs, final and test CSVs); S3 and S4 present (repo-auditor) | [x] | |
 
 ## Verifier (pasted verbatim from the work-verifier report)
 <!-- VERIFIER SECTION START -->

@@ -41,6 +41,6 @@ They must STOP and escalate (it reaches you under "Waiting for you" in the summa
 | Checkpoint | Date and time (CT) | Commit | Summary file | Corrections I asked for | Signed |
 |---|---|---|---|---|---|
 | H1 | 10/04/2026 11:33 AM | 07ba010 | docs/reports/H1_SUMMARY.md | D2 to D8 deferred to H2; decided from train EDA | Joseph Clay |
-| H2 | | | | | |
+| H2 | 10/04/2026 4:23 PM | f4b696f | docs/reports/H2_SUMMARY.md | Kept D1. Signed D2 to D8 from train EDA (ccc2dc4). 3 validator fixes in nb02 (c17a968). Test shares in nb01 kept because the D1 card requires them. | Joseph Clay |
 | H3 | | | | | |
 | H4 | | | | | |
