@@ -26,7 +26,26 @@ def load_raw(path: Path = config.RAW_PATH) -> pd.DataFrame:
     are read as missing (check the file to see how missing values are written); the file hash
     is unchanged afterwards.
     """
-    raise NotImplementedError("TODO H2: see docs/specs/nb01_load_split.md")
+    # First pass: read as written, to find the text tokens used for missing values.
+    first = pd.read_csv(path)
+    tokens = missing_tokens(first)
+    # Second pass: read again with those tokens treated as missing.
+    return pd.read_csv(path, na_values=tokens)
+
+
+def missing_tokens(df: pd.DataFrame) -> list[str]:
+    """Find text tokens that stand for missing values inside number columns.
+
+    A text column whose values are numbers except for a few repeated text tokens is a number
+    column with placeholders. Those tokens are returned. Real text columns are left alone.
+    """
+    tokens: set[str] = set()
+    for col in [c for c in df.columns if not pd.api.types.is_numeric_dtype(df[c])]:
+        values = df[col].dropna().astype(str)
+        as_number = pd.to_numeric(values, errors="coerce")
+        if as_number.notna().any():
+            tokens.update(values[as_number.isna()].unique())
+    return sorted(tokens)
 
 
 def split_train_test(df: pd.DataFrame, test_size: float = config.TEST_SIZE,
@@ -37,7 +56,19 @@ def split_train_test(df: pd.DataFrame, test_size: float = config.TEST_SIZE,
     part; no id in both parts; same seed gives the same split; returns copies so later steps
     cannot change the original frame. Stratification and seed are decision card D1.
     """
-    raise NotImplementedError("TODO H2: see docs/decisions/D1_split.md")
+    from sklearn.model_selection import train_test_split
+
+    if seed is None:
+        raise ValueError("SPLIT_SEED is blank in config.py: decision card D1")
+    # D1: None means a plain random split; a column name or a list of names means stratify.
+    if stratify_on is None:
+        labels = None
+    elif isinstance(stratify_on, str):
+        labels = df[stratify_on]
+    else:
+        labels = df[list(stratify_on)].astype(str).agg("|".join, axis=1)
+    train, test = train_test_split(df, test_size=test_size, random_state=seed, stratify=labels)
+    return train.copy(), test.copy()
 
 
 def fit_prep(train: pd.DataFrame) -> dict:
@@ -85,4 +116,10 @@ def save_csv(df: pd.DataFrame, path: Path) -> Path:
 
     Contract: refuses to write anywhere inside data/raw.
     """
-    raise NotImplementedError("TODO H2: needed by notebook 01 (spec nb01_load_split.md, card D1)")
+    target = Path(path).resolve()
+    raw_dir = config.RAW_PATH.parent.resolve()
+    if target == raw_dir or raw_dir in target.parents:
+        raise PermissionError(f"refusing to write inside data/raw: {target}")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(target, index=False)
+    return target
