@@ -17,21 +17,21 @@ Written by the repo-auditor from the reports listed below. Facts only, no interp
 ## Approve or correct (Joseph ticks each line)
 | # | Item | Fact from the reports | Approve | Correct (what, in my words) |
 |---|---|---|---|---|
-| 1 | Card vs notebook D2 to D8 | 7 MATCH, 0 DIFFERS; D7 "Column types going in: cast to float first" vs `fit_resample(X.astype(float), y)` MATCH (validator 1618 §1, 1704 §2) | [ ] | |
-| 2 | Card "how to test" steps | 30 steps: 27 MATCH, 0 MISMATCH, 2 NOT RUN (D6.1 other orders; D7.5 second k), 1 N/A (D2.4, id not kept) (validator 1618 §2) | [ ] | |
-| 3 | Leakage | every §3 row PASS (report header: leakage and integrity 24 PASS, 0 FAIL): every fit inside `fit_prep` on train only; MinMaxScaler exercise on train; `fit_resample` once on prepared train; test path transform only; state holds train only statistics; test never balanced, not filtered by D2 (validator 1618 §3, verifier 1711 #13) | [ ] | |
-| 4 | Reconciliation table rows | raw 5110; train 3577; test raw 1533; train after D2 3576 (−1); prepared train 3576; after SMOTE 10200 (+6624); after repair 10200; final 10200; test transformed 1533 (validator 1618 §4) | [ ] | |
-| 5 | Reconciliation table columns | raw 12; prepared train 18 (−1 id, +1 bmi_missing, −4 text, +10 one hot); after SMOTE 19 (+is_synthetic); final 23 (work_type −1 +5 one hot); test transformed 23, same columns in order (validator 1618 §4) | [ ] | |
-| 6 | Integrity after SMOTE | every §5 row PASS, final and test: no NaN, all numeric, 0/1 columns only 0/1, each one hot group sums to 1, is_synthetic 6624 = rows added, real rows = prepared train, work_type 2040 × 5; label count = one hot sum for all 5 (validator 1618 §5, 1704 §3) | [ ] | |
-| 7 | D8 repair change counts | 0/1: hypertension 334, heart_disease 223, stroke 194, bmi_missing 181; one hot rows: gender 658, ever_married 123, Residence_type 735, smoking_status 1056; 0 invalid after repair (nb04, validator 1618 §2 D8.1, D8.2) | [ ] | |
-| 8 | D8 range check | synthetic rows outside work_type real min/max: age 0, avg_glucose_level 0, bmi 0 (nb04, validator 1618 §2 D8.3) | [ ] | |
-| 9 | Independent rebuilds | prepared train, final file and test file each equal the validator's own rebuild (atol 1e-9) (validator 1618 §1, §5) | [ ] | |
-| 10 | Claims in changed prose | 1618: 20 rows, 17 MATCH, 0 MISMATCH, 3 NOT CHECKABLE; 1704: 1 MATCH (D7 "0.76 would become 0 as loaded") | [ ] | |
-| 11 | Tests, lint, notebooks | pytest `64 passed, 1 skipped`; ruff `All checks passed!` on src, tests, scripts, notebooks; counts 1..28 (nb03), 1..29 (nb04), 0 errors (repo-auditor) | [ ] | |
-| 12 | Reproducibility | clone reruns: nb04 `0 of 29` differ; nb03 `1 of 28` differ in the auditor clone (code cell 23, stdout split into 2 vs 1 stream chunks, joined text identical; verifier clone `0 of 28`); 4 data file SHA-256 identical in auditor clone, verifier clone and working copy (repo-auditor, verifier 1711) | [ ] | |
-| 13 | A2.5 | D2 to D8 committed in ccc2dc4, D7 dtype line in 0b94ef8; notebooks 03 and 04 first committed by this audit, after both (repo-auditor) | [ ] | |
-| 14 | Secrets, junk, large files, reference material | none; largest new file 1010047 bytes; `prep_state.joblib` 3529 bytes, written by nb03, byte identical in clone rerun (repo-auditor) | [ ] | |
-| 15 | Deliverables | `check_deliverables.py`: 3 MISSING (proposal PDF, two journal PDFs, H4); S5a, S5b, S8 present (repo-auditor) | [ ] | |
+| 1 | Card vs notebook D2 to D8 | 7 MATCH, 0 DIFFERS; D7 "Column types going in: cast to float first" vs `fit_resample(X.astype(float), y)` MATCH (validator 1618 §1, 1704 §2) | [x] | |
+| 2 | Card "how to test" steps | 30 steps: 27 MATCH, 0 MISMATCH, 2 NOT RUN (D6.1 other orders; D7.5 second k), 1 N/A (D2.4, id not kept) (validator 1618 §2) | [x] | |
+| 3 | Leakage | every §3 row PASS (report header: leakage and integrity 24 PASS, 0 FAIL): every fit inside `fit_prep` on train only; MinMaxScaler exercise on train; `fit_resample` once on prepared train; test path transform only; state holds train only statistics; test never balanced, not filtered by D2 (validator 1618 §3, verifier 1711 #13) | [x] | |
+| 4 | Reconciliation table rows | raw 5110; train 3577; test raw 1533; train after D2 3576 (−1); prepared train 3576; after SMOTE 10200 (+6624); after repair 10200; final 10200; test transformed 1533 (validator 1618 §4) | [x] | |
+| 5 | Reconciliation table columns | raw 12; prepared train 18 (−1 id, +1 bmi_missing, −4 text, +10 one hot); after SMOTE 19 (+is_synthetic); final 23 (work_type −1 +5 one hot); test transformed 23, same columns in order (validator 1618 §4) | [x] | |
+| 6 | Integrity after SMOTE | every §5 row PASS, final and test: no NaN, all numeric, 0/1 columns only 0/1, each one hot group sums to 1, is_synthetic 6624 = rows added, real rows = prepared train, work_type 2040 × 5; label count = one hot sum for all 5 (validator 1618 §5, 1704 §3) | [x] | |
+| 7 | D8 repair change counts | 0/1: hypertension 334, heart_disease 223, stroke 194, bmi_missing 181; one hot rows: gender 658, ever_married 123, Residence_type 735, smoking_status 1056; 0 invalid after repair (nb04, validator 1618 §2 D8.1, D8.2) | [x] | |
+| 8 | D8 range check | synthetic rows outside work_type real min/max: age 0, avg_glucose_level 0, bmi 0 (nb04, validator 1618 §2 D8.3) | [x] | |
+| 9 | Independent rebuilds | prepared train, final file and test file each equal the validator's own rebuild (atol 1e-9) (validator 1618 §1, §5) | [x] | |
+| 10 | Claims in changed prose | 1618: 20 rows, 17 MATCH, 0 MISMATCH, 3 NOT CHECKABLE; 1704: 1 MATCH (D7 "0.76 would become 0 as loaded") | [x] | |
+| 11 | Tests, lint, notebooks | pytest `64 passed, 1 skipped`; ruff `All checks passed!` on src, tests, scripts, notebooks; counts 1..28 (nb03), 1..29 (nb04), 0 errors (repo-auditor) | [x] | |
+| 12 | Reproducibility | clone reruns: nb04 `0 of 29` differ; nb03 `1 of 28` differ in the auditor clone (code cell 23, stdout split into 2 vs 1 stream chunks, joined text identical; verifier clone `0 of 28`); 4 data file SHA-256 identical in auditor clone, verifier clone and working copy (repo-auditor, verifier 1711) | [x] | |
+| 13 | A2.5 | D2 to D8 committed in ccc2dc4, D7 dtype line in 0b94ef8; notebooks 03 and 04 first committed by this audit, after both (repo-auditor) | [x] | |
+| 14 | Secrets, junk, large files, reference material | none; largest new file 1010047 bytes; `prep_state.joblib` 3529 bytes, written by nb03, byte identical in clone rerun (repo-auditor) | [x] | |
+| 15 | Deliverables | `check_deliverables.py`: 3 MISSING (proposal PDF, two journal PDFs, H4); S5a, S5b, S8 present (repo-auditor) | [x] | |
 
 ## Verifier (pasted verbatim from the work-verifier report)
 <!-- VERIFIER SECTION START -->
