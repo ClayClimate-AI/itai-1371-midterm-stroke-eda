@@ -5,7 +5,7 @@
 
 ## 1. My role
 
-* This project was conducted individually. I carried out each method decision, reviewed and signed each checkpoint, wrote my interpretation, and directed, collaborated and asked clarifying question(tutor-reviewer-agent) with AI agents that implemented., ran and checked the codebase.
+* This project was conducted individually. I carried out each method decision, reviewed and signed each checkpoint, wrote my interpretation, and directed the AI agents that implemented, ran and checked the codebase, collaborated with them, and asked the tutor-reviewer agent clarifying questions.
 
 ## 2. What I did, with proof
 

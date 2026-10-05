@@ -1,10 +1,5 @@
 # Reflection journal (Canvas item 7, Reflection 10 points)
 
-> PROMPTS ONLY. Answer each one in your own words, using numbers from YOUR notebooks, and name
-> the notebook and cell for every number. Then export to
-> `docs/MTJournal_R_JosephClay_ITAI1371.pdf`. The tutor-reviewer may point out gaps or unclear
-> sentences; it does not write answers. The data-validator recomputes every number you write.
-
 **Canvas S7:** "Upload detailed proposal (reflection journal) of what you accomplished; each team member talks about contribution in the contribution journal"
 **Canvas R3:** "Reflection 10"
 
