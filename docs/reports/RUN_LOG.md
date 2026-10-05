@@ -379,3 +379,36 @@ Change:  none to code or data
 Rule:    n/a
 Commit:  feat(agent): stroke share by work_type cell in notebook 04  [H4] (hash in git log and the repo-auditor reply)
 ```
+
+```text
+#33  2026-10-04 20:07 CT  data-validator  since H3 (a126aa1, H3-signed)
+Type:    RERUN (check run, no code or data changed)
+What:    A2 on all prose changed since H3 (README, 3 journals, RCA 0001, nb04 cell 26, changed ADR and card lines, 3 PDFs): 87 claims, 76 MATCH, 2 MISMATCH (nb04 cell 26 N2; reflection §2 J5 cited source), 1 NO SOURCE CELL (reflection §5 J17), 8 NOT CHECKABLE; 15 commit hashes OK; integrity 20 PASS 0 FAIL; nb04 cell 25 table 10 of 10 MATCH; pytest 64 passed 1 skipped
+Why:     H4 data-validator report (closes work-verifier H4 FLAG #5)
+Files:   docs/reports/data-validator/H4_20261004_2007.md
+Change:  none
+Rule:    n/a (no escalations; MISMATCH and NO SOURCE CELL items are Joseph's text, listed in H4_SUMMARY.md)
+Commit:  docs(agent): H4 reports, run log and summary  [H4]
+```
+
+```text
+#34  2026-10-04 20:11 CT  work-verifier  since H3 (a126aa1, H3-signed)
+Type:    RERUN (check run in clone scratch/clones/work-verifier_H4_20261004_2011)
+What:    checked 24 files, 3 commits and RUN_LOG #28 to #32: 18 findings, 11 OK, 7 FLAG (#5 validator report unlogged, closed by #33; #8 builder wrote scratch/ at Joseph's request; #9 builder /tmp PNG per Joseph's note; #10 journal PDFs made with WeasyPrint outside the repo venv; #12 B1.4 skip; #14 and #15 validator MISMATCHes rechecked); clone rerun 0 differing code cells in all 4 notebooks; 7 data hashes equal
+Why:     H4 work-verifier report
+Files:   docs/reports/work-verifier/H4_20261004_2011.md
+Change:  none
+Rule:    n/a (FLAGs go to Joseph by design)
+Commit:  docs(agent): H4 reports, run log and summary  [H4]
+```
+
+```text
+#35  2026-10-04 20:17 CT  repo-auditor  since H3 (a126aa1, H3-signed)
+Type:    RERUN (FULL audit in clone scratch/clones/repo-auditor_H4_20261004_2017)
+What:    new venv install OK (Python 3.14.6), setup_gate OK, raw hash OK, pytest 64 passed 1 skipped, ruff clean (src tests scripts; notebooks); 4 notebooks rerun with the clone venv kernel (python3): 01 0/17, 02 0/24, 03 1/28 (stdout chunking only, text identical), 04 0/30 differ; 7 data hashes unchanged; check_deliverables OK 11 of 11; Canvas S1 to S8 in README table; README pointers 0 BROKEN; no secrets or junk; A2.5 holds for D1 to D8; CI continue-on-error removed (run result NOT VERIFIED)
+Why:     H4 full reproducibility audit
+Files:   docs/reports/repo-auditor/H4_20261004_2017.md, docs/reports/repo-auditor/H4_20261004_1856_commit.md (committed now), docs/reports/RUN_LOG.md, docs/reports/H4_SUMMARY.md
+Change:  none to code or data; .gitignore unchanged
+Rule:    n/a (no escalations)
+Commit:  docs(agent): H4 reports, run log and summary  [H4]
+```
