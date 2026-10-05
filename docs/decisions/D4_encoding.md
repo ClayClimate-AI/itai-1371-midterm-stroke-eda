@@ -52,7 +52,7 @@ False for A or C). The one hot group test reads it.
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
   `notebooks/03_preprocess_before_after.ipynb` cells 29 to 32 (columns, group sums, chart,
-  head); `notebooks/04_smote_balance.ipynb` cells 31, 32 (work_type one hot chart), 39;
+  head); `notebooks/04_smote_balance.ipynb` cells 33, 34 (work_type one hot chart), 41;
   validator reports `docs/reports/data-validator/H3_20261004_1618.md` §2, §5 and
   `docs/reports/data-validator/H3_20261004_1704.md` §3
 

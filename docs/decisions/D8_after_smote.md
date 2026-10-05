@@ -72,7 +72,7 @@ the flag skip unless it is True.
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
   `notebooks/04_smote_balance.ipynb` cells 18 to 21 (repair counts and chart), 23 (0/1 shares),
-  26 to 28 (numeric check), 31 to 36 (final file), 38 to 42 (test file); validator report
+  28 to 30 (numeric check), 33 to 38 (final file), 40 to 44 (test file); validator report
   `docs/reports/data-validator/H3_20261004_1618.md` §2, §4, §5
 
 * **What I will watch for:** Repair changes generated values, so the change counts must be printed. The range check needs real units, so values are converted with `inverse_transform` first. `is_synthetic` isn't a patient measurement, so it has to be dropped or handled before modeling.
@@ -85,5 +85,5 @@ the flag skip unless it is True.
 ## Review at H3 (Joseph)
 
 * [x] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:** nb04 cells 19, 26, 34: 0/1 fixes 334, 223, 194, 181; 0 out of range; final 10200 x 23.
+* **What in the H3 evidence I looked at:** nb04 cells 19, 28, 36: 0/1 fixes 334, 223, 194, 181; 0 out of range; final 10200 x 23.
 * **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)

@@ -39,12 +39,12 @@ Joseph's reasoning, quoted from the card:
 Source, quoted from the card: "Canvas S8 and GL9; D8 card; D7 SMOTE setup"
 
 ## Consequences
-* Good: cell 20, In[14]: every count is 0 after repair. Cell 26, In[17]: `synthetic values outside their work_type's real range: {'age': 0, 'avg_glucose_level': 0, 'bmi': 0}`. Cell 34, In[22]: final `10200` rows, `23` columns.
+* Good: cell 20, In[14]: every count is 0 after repair. Cell 28, In[18]: `synthetic values outside their work_type's real range: {'age': 0, 'avg_glucose_level': 0, 'bmi': 0}`. Cell 36, In[23]: final `10200` rows, `23` columns.
 * Bad or risk, quoted from the card: "Repair changes generated values, so the change counts must be printed. The range check needs real units, so values are converted with `inverse_transform` first. `is_synthetic` isn't a patient measurement, so it has to be dropped or handled before modeling." Change counts are printed in cell 19, In[13].
 * Follow up: the card's "Review at H3" block is still for Joseph to complete.
 
 ## Evidence
-* Notebook and cell: `notebooks/04_smote_balance.ipynb` cells 18 to 21 (repair counts and chart), 23 (0/1 shares), 26 to 28 (numeric check), 31 to 36 (final file), 38 to 42 (test file)
+* Notebook and cell: `notebooks/04_smote_balance.ipynb` cells 18 to 21 (repair counts and chart), 23 (0/1 shares), 28 to 30 (numeric check), 33 to 38 (final file), 40 to 44 (test file)
 * Validator report: `docs/reports/data-validator/H3_20261004_1618.md` §2 (D8 steps), §4 (reconciliation), §5 (integrity)
 * Test: `tests/test_invariants_final.py::test_binary_columns_hold_only_0_and_1`, `tests/test_invariants_final.py::test_synthetic_flag_reconciles`, `tests/test_invariants_final.py::test_final_is_all_numeric`
 * Commit: `ccc2dc4` (card), `a7ddbbc` (notebook 04)

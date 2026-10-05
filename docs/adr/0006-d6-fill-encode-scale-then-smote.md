@@ -34,12 +34,12 @@ Joseph's reasoning, quoted from the card:
 Source, quoted from the card: "Prof Rao in class, Oct 1, 2026; Canvas P4; D6 card; imbalanced-learn SMOTE documentation"
 
 ## Consequences
-* Good: SMOTE ran on the prepared train rows without an error (`notebooks/04_smote_balance.ipynb` cell 8, In[5]). The real and synthetic number summaries in real units are in cell 28, In[19].
+* Good: SMOTE ran on the prepared train rows without an error (`notebooks/04_smote_balance.ipynb` cell 8, In[5]). The real and synthetic number summaries in real units are in cell 30, In[20].
 * Bad or risk, quoted from the card: "SMOTE will create in between values in the 0/1 and one hot columns (like 0.4 for hypertension), which D8 repairs. The scaler describes real train rows only, because it is fit before SMOTE. Test goes through the same train fitted steps and is never balanced."
 * Follow up: the card's "Review at H3" block is still for Joseph to complete.
 
 ## Evidence
-* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cell 2 (step order heading), cells 14 and 20; `notebooks/04_smote_balance.ipynb` cells 8, 12 (synthetic rows in real units), 27 and 28 (real vs synthetic)
+* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cell 2 (step order heading), cells 14 and 20; `notebooks/04_smote_balance.ipynb` cells 8, 12 (synthetic rows in real units), 29 and 30 (real vs synthetic)
 * Validator report: `docs/reports/data-validator/H3_20261004_1618.md` §1 (D6 MATCH) and §2 (D6 steps)
 * Test: `tests/test_pipeline_contracts.py::test_balance_only_adds_rows`, `tests/test_invariants_final.py::test_test_set_was_never_balanced`
 * Commit: `ccc2dc4` (card), `a7ddbbc` (notebooks 03 and 04)

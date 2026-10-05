@@ -59,7 +59,7 @@ your H3 summary. At H3 you keep or amend the decision.
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
   `notebooks/03_preprocess_before_after.ipynb` cells 14 (fit), 18 to 22 (counts and flag),
-  23 to 25 (before and after charts and table); `notebooks/04_smote_balance.ipynb` cell 40
+  23 to 25 (before and after charts and table); `notebooks/04_smote_balance.ipynb` cell 42
   (test fill check); validator report `docs/reports/data-validator/H3_20261004_1618.md` §2, §3
 
 * **What I will watch for:** All 138 filled rows get the same value, which narrows bmi's spread a little. `bmi_missing` has to stay 0/1 after SMOTE (the D8 repair handles that). No blanks can remain after this step.

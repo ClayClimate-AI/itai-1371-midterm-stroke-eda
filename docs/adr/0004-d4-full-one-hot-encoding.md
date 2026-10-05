@@ -34,12 +34,12 @@ Joseph's reasoning, quoted from the card:
 Source, quoted from the card: "Canvas P5 and P6; D4 card; scikit-learn OneHotEncoder documentation; category counts in notebooks/02_eda_train.ipynb"
 
 ## Consequences
-* Good: cell 30, In[20] shows every group sums to 1 on train. `notebooks/04_smote_balance.ipynb` cell 32, In[21] shows each work_type label count equals its one hot column sum (2040 each), and cell 39, In[26] prints `same columns in the same order; no missing values` for test.
+* Good: cell 30, In[20] shows every group sums to 1 on train. `notebooks/04_smote_balance.ipynb` cell 34, In[22] shows each work_type label count equals its one hot column sum (2040 each), and cell 41, In[27] prints `same columns in the same order; no missing values` for test.
 * Bad or risk, quoted from the card: "More columns, and each group always adds up to 1, which matters for some linear models in the Final. Train and test must end up with the same column names in the same order."
 * Follow up: the card's "Review at H3" block is still for Joseph to complete.
 
 ## Evidence
-* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cells 29 to 32; `notebooks/04_smote_balance.ipynb` cells 31, 32, 39
+* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cells 29 to 32; `notebooks/04_smote_balance.ipynb` cells 33, 34, 41
 * Validator report: `docs/reports/data-validator/H3_20261004_1618.md` §2 (D4 steps) and §5 (integrity); `docs/reports/data-validator/H3_20261004_1704.md` §3
 * Test: `tests/test_invariants_final.py::test_each_onehot_group_is_valid`, `tests/test_invariants_final.py::test_test_set_has_same_columns_as_final`
 * Commit: `ccc2dc4` (card), `a7ddbbc` (notebooks 03 and 04)

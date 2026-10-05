@@ -34,11 +34,11 @@ Source, quoted from the card: "Canvas P2 and P3; D5 card; scikit-learn StandardS
 
 ## Consequences
 * Good: cell 36, In[24]: mean `-0.0000 0.0000 -0.0000`, std `1.0001 1.0001 1.0001`. Cell 40, In[26]: MinMaxScaler min `0.0` and max `1.0` for each column.
-* Bad or risk, quoted from the card: "Glucose's long right tail and bmi's extreme high value pull the mean and standard deviation. Scaled values are z scores, so I keep the fitted scaler to convert back to real units for charts and range checks. Test values outside the train range are expected, not an error." The test range is printed in `notebooks/04_smote_balance.ipynb` cell 41, In[28].
+* Bad or risk, quoted from the card: "Glucose's long right tail and bmi's extreme high value pull the mean and standard deviation. Scaled values are z scores, so I keep the fitted scaler to convert back to real units for charts and range checks. Test values outside the train range are expected, not an error." The test range is printed in `notebooks/04_smote_balance.ipynb` cell 43, In[29].
 * Follow up: the card's "Review at H3" block is still for Joseph to complete.
 
 ## Evidence
-* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cells 35 to 37 (StandardScaler), 40 and 41 (normalization exercise), 44 (scaler saved); `notebooks/04_smote_balance.ipynb` cell 41 (test range)
+* Notebook and cell: `notebooks/03_preprocess_before_after.ipynb` cells 35 to 37 (StandardScaler), 40 and 41 (normalization exercise), 44 (scaler saved); `notebooks/04_smote_balance.ipynb` cell 43 (test range)
 * Validator report: `docs/reports/data-validator/H3_20261004_1618.md` §2 (D5 steps) and §3 (scaler fit on train only)
 * Test: `tests/test_pipeline_contracts.py::test_transform_is_row_by_row`, `tests/test_decision_slots.py::test_scale_columns`
 * Commit: `ccc2dc4` (card), `a7ddbbc` (notebooks 03 and 04)

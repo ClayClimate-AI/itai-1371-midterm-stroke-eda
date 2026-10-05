@@ -57,7 +57,7 @@ train only.
 
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
   `notebooks/03_preprocess_before_after.ipynb` cell 2 (step order heading), cells 14 and 20;
-  `notebooks/04_smote_balance.ipynb` cells 8, 12 (synthetic rows in real units), 27 and 28
+  `notebooks/04_smote_balance.ipynb` cells 8, 12 (synthetic rows in real units), 29 and 30
   (real vs synthetic chart and table); validator report
   `docs/reports/data-validator/H3_20261004_1618.md` §1, §2
 

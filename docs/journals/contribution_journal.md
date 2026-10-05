@@ -11,27 +11,27 @@
 
 | Deliverable | What I did | Proof (file and commit hash) |
 |---|---|---|
-| 1 dataset URL document | Recorded the Kaggle source and URL for the stroke dataset | `docs/dataset_url.md`, [fill hash] |
-| 2 one page proposal | [fill at H4] | `docs/MT_JosephClay_ITAI1371_Proposal.pdf`, [fill at H4] |
+| 1 dataset URL document | Recorded the Kaggle source and URL for the stroke dataset | `docs/dataset_url.md`, 89193d0 |
+| 2 one page proposal | wrote the one page proposal from my signed decisions. | `docs/MT_JosephClay_ITAI1371_Proposal.pdf`, [fill] |
 | 3 split notebook | Chose and signed the 70/30 split (D1: plain random, seed 33), then reviewed the split checks | `notebooks/01_load_split.ipynb`, D1 card 149de94, notebook 5f0abd5 |
-| 4 EDA on train only | Wrote the observation under every chart and the findings cell, then fixed 3 points the data validator raised | `notebooks/02_eda_train.ipynb`, [fill hash of "EDA observations" commit], fixes c17a968 |
-| 5 before and after notebooks | [fill at H3] | `notebooks/03_preprocess_before_after.ipynb`, `notebooks/04_smote_balance.ipynb`, [fill at H3] |
+| 4 EDA on train only | Wrote the observation under every chart and the findings cell, then fixed 3 points the data validator raised | `notebooks/02_eda_train.ipynb`, a24f16f, fixes c17a968 |
+| 5 before and after notebooks | signed D2 to D8, ran notebooks 03 and 04, wrote all H3 notes, and asked for the stroke by work_type cell. | `notebooks/03_preprocess_before_after.ipynb`, `notebooks/04_smote_balance.ipynb`, a7ddbbc, 1f4ae1e, c3594f5 |
 | 6 .ipynb files | Reviewed each notebook at its checkpoint | `notebooks/`, H1 78e6825, H2 ea395d1 |
-| 7 journals | Wrote both journals | `docs/MTJournal_C_JosephClay_ITAI1371.pdf`, `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, [fill at H4] |
-| 8 final clean dataset | [fill at H3] | `data/processed/stroke_clean_final.csv`, [fill at H3] |
+| 7 journals | Wrote both journals | `docs/MTJournal_C_JosephClay_ITAI1371.pdf`, `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, [fill] |
+| 8 final clean dataset | reviewed the final files and signed the integrity checks at H3. | `data/processed/stroke_clean_final.csv`, a7ddbbc |
 
 ## 3. Decisions I made
 
 | Card | My choice (short) | ADR |
 |---|---|---|
 | D1 split | A: plain random 70/30, seed 33, no stratify | `docs/adr/0001-d1-split-plain-random-70-30.md` |
-| D2 rows and columns | Remove the 1 gender "Other" row from train; drop id before modeling | [fill at H3] |
-| D3 missing values | Fill bmi with the train median (28.1); add a `bmi_missing` flag first; keep smoking "Unknown" as a category | [fill at H3] |
-| D4 encoding | Full one hot with handle_unknown ignore; work_type encoded after SMOTE | [fill at H3] |
-| D5 scaling and normalization | StandardScaler on age, glucose and bmi; MinMax shown as the normalization exercise | [fill at H3] |
-| D6 order around SMOTE | Fill, encode, scale, then plain SMOTE | [fill at H3] |
-| D7 SMOTE setup | Plain SMOTE on work_type, k 5, "auto", random_state 33, columns cast to float first | [fill at H3] |
-| D8 after SMOTE and final file | Round 0/1 and argmax repair, both numeric checks, scaled units, `is_synthetic` flag | [fill at H3] |
+| D2 rows and columns | Remove the 1 gender "Other" row from train; drop id before modeling | `docs/adr/0002-d2-remove-other-row-drop-id.md`, 550d8a9 |
+| D3 missing values | Fill bmi with the train median (28.1); add a `bmi_missing` flag first; keep smoking "Unknown" as a category | `docs/adr/0003-d3-median-fill-with-missing-flag.md`, 550d8a9 |
+| D4 encoding | Full one hot with handle_unknown ignore; work_type encoded after SMOTE | `docs/adr/0004-d4-full-one-hot-encoding.md`, 550d8a9 |
+| D5 scaling and normalization | StandardScaler on age, glucose and bmi; MinMax shown as the normalization exercise | `docs/adr/0005-d5-standard-scaler-on-number-columns.md`, 550d8a9 |
+| D6 order around SMOTE | Fill, encode, scale, then plain SMOTE | `docs/adr/0006-d6-fill-encode-scale-then-smote.md`, 550d8a9 |
+| D7 SMOTE setup | Plain SMOTE on work_type, k 5, "auto", random_state 33, columns cast to float first | `docs/adr/0007-d7-plain-smote-settings.md`, 550d8a9 |
+| D8 after SMOTE and final file | Round 0/1 and argmax repair, both numeric checks, scaled units, `is_synthetic` flag | `docs/adr/0008-d8-repair-check-and-final-file.md`, 550d8a9 |
 
 ## 4. AI use disclosure
 
@@ -57,7 +57,6 @@
 
 | Date | Checkpoint | Hours | What |
 |---|---|---|---|
-| 10/04/2026 | H1 | [fill] | Setup review, D1 split decision, H1 sign off |
-| 10/04/2026 | H2 | [fill] | EDA observations, D2 to D8 decisions, ADR 0001, H2 sign off |
-| 10/04/2026 | H3 | [fill] | |
-| 10/04/2026 | H4 | [fill] | |
+| Before Oct 4 | Prep | Several sessions over multiple days | Learning the concepts with the midterm explainer, mapped to the assignment criteria |
+| Before Oct 4 | H1 | Several sessions | Setting up the repo, the agents and protocols, and signing H1 |
+| Sun Oct 4 | H2 to H4 | All day, into the evening | H2 to H4: EDA notes, signing D1 to D8, notebooks 03 and 04, ADRs, journals, submit |

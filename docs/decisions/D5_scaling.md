@@ -53,7 +53,7 @@ Write why for each.
 * **Evidence** (added at H3: notebook name and cell number, chart, report file):
   `notebooks/03_preprocess_before_after.ipynb` cells 35 to 37 (StandardScaler and charts),
   40 and 41 (normalization exercise), 44 (scaler saved); `notebooks/04_smote_balance.ipynb`
-  cell 41 (test range); validator report `docs/reports/data-validator/H3_20261004_1618.md` §2, §3
+  cell 43 (test range); validator report `docs/reports/data-validator/H3_20261004_1618.md` §2, §3
 
 * **What I will watch for:** Glucose's long right tail and bmi's extreme high value pull the mean and standard deviation. Scaled values are z scores, so I keep the fitted scaler to convert back to real units for charts and range checks. Test values outside the train range are expected, not an error.
 
@@ -66,5 +66,5 @@ Write why for each.
 ## Review at H3 (Joseph)
 
 * [x] Keep as decided   [ ] Amend (new option, and why, in my words):
-* **What in the H3 evidence I looked at:** nb03 cell 36, nb04 cell 41: train mean 0.0000 and std 1.0001; test bmi max 4.6142.
+* **What in the H3 evidence I looked at:** nb03 cell 36, nb04 cell 43: train mean 0.0000 and std 1.0001; test bmi max 4.6142.
 * **Signed:** Joseph Clay, 10/04/2026 6:40PM (CT)
