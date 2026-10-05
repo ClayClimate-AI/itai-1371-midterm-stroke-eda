@@ -12,12 +12,12 @@
 | Deliverable | What I did | Proof (file and commit hash) |
 |---|---|---|
 | 1 dataset URL document | Recorded the Kaggle source and URL for the stroke dataset | `docs/dataset_url.md`, 89193d0 |
-| 2 one page proposal | wrote the one page proposal from my signed decisions. | `docs/MT_JosephClay_ITAI1371_Proposal.pdf`, [fill] |
+| 2 one page proposal | wrote the one page proposal from my signed decisions. | `docs/MT_JosephClay_ITAI1371_Proposal.pdf`, 2d6c658 |
 | 3 split notebook | Chose and signed the 70/30 split (D1: plain random, seed 33), then reviewed the split checks | `notebooks/01_load_split.ipynb`, D1 card 149de94, notebook 5f0abd5 |
 | 4 EDA on train only | Wrote the observation under every chart and the findings cell, then fixed 3 points the data validator raised | `notebooks/02_eda_train.ipynb`, a24f16f, fixes c17a968 |
 | 5 before and after notebooks | signed D2 to D8, ran notebooks 03 and 04, wrote all H3 notes, and asked for the stroke by work_type cell. | `notebooks/03_preprocess_before_after.ipynb`, `notebooks/04_smote_balance.ipynb`, a7ddbbc, 1f4ae1e, c3594f5 |
 | 6 .ipynb files | Reviewed each notebook at its checkpoint | `notebooks/`, H1 78e6825, H2 ea395d1 |
-| 7 journals | Wrote both journals | `docs/MTJournal_C_JosephClay_ITAI1371.pdf`, `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, [fill] |
+| 7 journals | Wrote both journals | `docs/MTJournal_C_JosephClay_ITAI1371.pdf`, `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, 2d6c658 |
 | 8 final clean dataset | reviewed the final files and signed the integrity checks at H3. | `data/processed/stroke_clean_final.csv`, a7ddbbc |
 
 ## 3. Decisions I made

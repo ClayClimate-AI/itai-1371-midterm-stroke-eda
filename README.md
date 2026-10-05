@@ -20,12 +20,12 @@ same 23 columns.
 | # | Canvas item (verbatim) | File in this repo | Role | Commit | Status |
 |---|---|---|---|---|---|
 | 1 | "Upload document showing URL of original dataset" | `docs/dataset_url.md` | final | 89193d0 | Done |
-| 2 | "Upload pdf describing dataset and proposal, not more than a page" | `docs/MT_JosephClay_ITAI1371_Proposal.pdf` | final | [fill] | Done |
+| 2 | "Upload pdf describing dataset and proposal, not more than a page" | `docs/MT_JosephClay_ITAI1371_Proposal.pdf` | final | 2d6c658 | Done |
 | 3 | "In jupyter notebook use python to split dataset: training 70%, testing 30%; Python loads training data into memory; do not split manually or in excel" | `notebooks/01_load_split.ipynb` | final | 5f0abd5 | Done |
 | 4 | "EDA performed only on training data; testing data untouched" | `notebooks/02_eda_train.ipynb` | final | a24f16f, c17a968 | Done |
 | 5 | "Jupyter notebook demonstrating before and after data processing" | `notebooks/03_preprocess_before_after.ipynb` and `notebooks/04_smote_balance.ipynb` | final | a7ddbbc, 1f4ae1e, c3594f5 | Done |
 | 6 | "Upload the .ipynb" | `notebooks/*.ipynb` (all four, outputs kept) | final | 5f0abd5, a7ddbbc, c3594f5 | Done |
-| 7 | "Upload detailed proposal (reflection journal) of what you accomplished; each team member talks about contribution in the contribution journal" | `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, `docs/MTJournal_C_JosephClay_ITAI1371.pdf` | final | [fill] | Done |
+| 7 | "Upload detailed proposal (reflection journal) of what you accomplished; each team member talks about contribution in the contribution journal" | `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, `docs/MTJournal_C_JosephClay_ITAI1371.pdf` | final | 2d6c658 | Done |
 | 8 | "Upload final clean dataset" | **`data/processed/stroke_clean_final.csv`** (train set after balancing; synthetic rows marked in `is_synthetic` only if chosen in D8) | **FINAL** | a7ddbbc | Done |
 | 8 support | (not a Canvas item) | `data/processed/stroke_test_transformed.csv` (test set, transformed only, never balanced) | supporting | a7ddbbc | Done |
 

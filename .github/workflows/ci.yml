@@ -75,7 +75,6 @@ jobs:
   # At H4, delete the continue-on-error line so a missing deliverable fails CI.
   deliverables:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout committed code
         uses: actions/checkout@v4
