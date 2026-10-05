@@ -1,13 +1,30 @@
-# ITAI 1371 Midterm EDA: Stroke Prediction Dataset
+# Stroke Prediction Dataset: EDA, Preprocessing and SMOTE Balancing
+
+![Course](https://img.shields.io/badge/course-ITAI%201371%20Midterm-1f6feb)
+![Checkpoints](https://img.shields.io/badge/checkpoints-H1%20to%20H4%20signed-2ea44f)
+![Python](https://img.shields.io/badge/python-3.13%20%7C%203.14-3776ab?logo=python&logoColor=white)
+![Jupyter](https://img.shields.io/badge/notebooks-4-f37626?logo=jupyter&logoColor=white)
+![Balancing](https://img.shields.io/badge/balancing-SMOTE%20on%20work__type-8250df)
+![Tests](https://img.shields.io/badge/tests-64%20passed%2C%201%20skipped-2ea44f)
+![Built with](https://img.shields.io/badge/built%20with-multi%20agent%20orchestration-ff6f00)
+![Agents](https://img.shields.io/badge/Kiro%20CLI-builder%20%2B%205%20subagents-6e40c9)
+[![CI](https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda/actions/workflows/ci.yml/badge.svg)](https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda/actions/workflows/ci.yml)
+![License](https://img.shields.io/badge/license-MIT-lightgrey)
+
+A reproducible pipeline that takes the Kaggle stroke dataset from raw CSV to a balanced, model
+ready train file and an untouched test file, built with multi agent orchestration.
 
 **Student:** Joseph Clay (independent contributor) | **Course:** ITAI 1371 | **Due:** see Canvas
 
-> Scaffold state: this repo starts as scaffolding only. Every notebook, chart, function body,
-> decision, ADR, journal, the proposal and the clean CSV are produced during the work described in
-> **[LAB_GUIDE.md](LAB_GUIDE.md)**. The commit history and the reports in `docs/reports/` are the
-> proof of work. Every number in this README must point to the notebook cell that printed it.
+## Contents
 
-## Summary (fill in your words at H4)
+[About](#about) · [Results](#results-at-a-glance) · [Quick start](#quick-start) ·
+[Pipeline](#pipeline) · [Deliverables](#deliverables) · [Decisions](#decisions) ·
+[Balancing](#balancing) · [How this was built](#how-this-was-built) ·
+[Structure](#project-structure) · [Quality checks](#quality-checks) ·
+[Submission](#submission)
+
+## About
 
 This repo takes the Kaggle stroke dataset (5110 rows) through EDA, preprocessing and SMOTE
 balancing on work_type. Train was split 70/30 with seed 33 (3577 train, 1533 test, nb01). After
@@ -15,21 +32,124 @@ cleaning, encoding and scaling, SMOTE grew every work_type group to 2040 rows, g
 file of 10200 rows by 23 columns (nb04 cells 9, 33). The test file was never balanced and has the
 same 23 columns.
 
-## Deliverables (Canvas items 1 to 8)
+> **Built with multi agent orchestration.** I made and signed every decision. A Kiro CLI builder
+> agent wrote the code from my signed decision cards, and five subagents ran, checked and audited
+> the work between four checkpoints that only I could sign. See
+> [How this was built](#how-this-was-built).
 
-| # | Canvas item (verbatim) | File in this repo | Role | Commit | Status |
-|---|---|---|---|---|---|
-| 1 | "Upload document showing URL of original dataset" | `docs/dataset_url.md` | final | 89193d0 | Done |
-| 2 | "Upload pdf describing dataset and proposal, not more than a page" | `docs/MT_JosephClay_ITAI1371_Proposal.pdf` | final | 2d6c658 | Done |
-| 3 | "In jupyter notebook use python to split dataset: training 70%, testing 30%; Python loads training data into memory; do not split manually or in excel" | `notebooks/01_load_split.ipynb` | final | 5f0abd5 | Done |
-| 4 | "EDA performed only on training data; testing data untouched" | `notebooks/02_eda_train.ipynb` | final | a24f16f, c17a968 | Done |
-| 5 | "Jupyter notebook demonstrating before and after data processing" | `notebooks/03_preprocess_before_after.ipynb` and `notebooks/04_smote_balance.ipynb` | final | a7ddbbc, 1f4ae1e, c3594f5 | Done |
-| 6 | "Upload the .ipynb" | `notebooks/*.ipynb` (all four, outputs kept) | final | 5f0abd5, a7ddbbc, c3594f5 | Done |
-| 7 | "Upload detailed proposal (reflection journal) of what you accomplished; each team member talks about contribution in the contribution journal" | `docs/MTJournal_R_JosephClay_ITAI1371.pdf`, `docs/MTJournal_C_JosephClay_ITAI1371.pdf` | final | 2d6c658 | Done |
-| 8 | "Upload final clean dataset" | **`data/processed/stroke_clean_final.csv`** (train set after balancing; synthetic rows marked in `is_synthetic` only if chosen in D8) | **FINAL** | a7ddbbc | Done |
-| 8 support | (not a Canvas item) | `data/processed/stroke_test_transformed.csv` (test set, transformed only, never balanced) | supporting | a7ddbbc | Done |
+> **Proof of work.** The commit history and the reports in `docs/reports/` record every step. Every
+> number in this README points to the notebook cell that printed it. Steps are in
+> [LAB_GUIDE.md](LAB_GUIDE.md).
 
-Raw data: `data/raw/healthcare-dataset-stroke-data.csv` (never edited; `data/raw/SHA256SUMS`).
+## Results at a glance
+
+| Measure | Value | Printed by |
+|---|---|---|
+| Raw dataset | 5110 rows × 12 columns | nb01 cell 6 |
+| Train / test split | 3577 / 1533 (70/30, seed 33) | nb01 cell 13 |
+| Missing values (train) | bmi only, 138 rows | nb02 cell 16 |
+| Stroke share (train) | 4.7% | nb02 cell 19 |
+| work_type after SMOTE | 2040 rows in every group | nb04 cell 9 |
+| Synthetic rows added | 6624, marked in `is_synthetic` | nb04 cell 9 |
+| Synthetic values outside real range | 0 (age, glucose, bmi) | nb04 cell 28 |
+| Final train file | 10200 rows × 23 columns | nb04 cell 33 |
+| Test file | 1533 rows × 23 columns, never balanced | nb04 cells 40, 41 |
+
+## Quick start
+
+Tested on Python 3.14 and 3.13 (CI runs both).
+
+```bash
+python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
+python scripts/setup_gate.py           # environment check
+python -m pytest -q                    # tests
+jupyter lab                            # run notebooks 01 to 04 in order, Restart and Run All
+python scripts/check_deliverables.py   # every Canvas file present
+```
+
+Full checklist: [VALIDATION_PROTOCOL.md](VALIDATION_PROTOCOL.md).
+
+## Pipeline
+
+Every value that is learned from data is learned from train only. The test set is transformed with
+those train fitted objects, never fit and never balanced.
+
+```text
+raw CSV  5110 x 12
+   │  nb01  split 70/30, seed 33 (D1)
+   ├──▶ test  1533 x 12 ─────────────────────────────────────┐
+   ▼                                                         │  transform only:
+train  3577 x 12                                             │  never fit,
+   │  nb02  EDA on train only                                │  never balanced
+   │  nb03  drop Other row and id (D2), fill bmi + flag (D3),│
+   │        one hot (D4), StandardScaler (D5), fit on train  │
+   ▼                                                         │
+prepared train  3576 x 18                                    │
+   │  nb04  SMOTE on work_type (D6, D7), repair + checks (D8)│
+   ▼                                                         ▼
+final train  10200 x 23                      test transformed  1533 x 23
+stroke_clean_final.csv                       stroke_test_transformed.csv
+```
+
+| Notebook | What it does |
+|---|---|
+| [`01_load_split`](notebooks/01_load_split.ipynb) | loads the raw CSV, splits 70/30 once, saves train and test |
+| [`02_eda_train`](notebooks/02_eda_train.ipynb) | EDA on train only: 14 charts and my findings |
+| [`03_preprocess_before_after`](notebooks/03_preprocess_before_after.ipynb) | D2 to D5 with before and after charts |
+| [`04_smote_balance`](notebooks/04_smote_balance.ipynb) | SMOTE, repair, checks, final and test files |
+
+## Deliverables
+
+| # | Item | File | Commit | Status |
+|---|---|---|---|---|
+| 1 | Dataset URL | [`docs/dataset_url.md`](docs/dataset_url.md) | 89193d0 | Done |
+| 2 | One page proposal | [Proposal PDF](docs/MT_JosephClay_ITAI1371_Proposal.pdf) | 2d6c658 | Done |
+| 3 | 70/30 split in Python | [`01_load_split.ipynb`](notebooks/01_load_split.ipynb) | 5f0abd5 | Done |
+| 4 | EDA on train only | [`02_eda_train.ipynb`](notebooks/02_eda_train.ipynb) | a24f16f<br>c17a968 | Done |
+| 5 | Before and after | [`03_preprocess_before_after.ipynb`](notebooks/03_preprocess_before_after.ipynb)<br>[`04_smote_balance.ipynb`](notebooks/04_smote_balance.ipynb) | a7ddbbc<br>1f4ae1e<br>c3594f5 | Done |
+| 6 | The .ipynb files | [`notebooks/`](notebooks/) (all four, outputs kept) | 5f0abd5<br>a7ddbbc<br>c3594f5 | Done |
+| 7 | Journals | [Reflection journal PDF](docs/MTJournal_R_JosephClay_ITAI1371.pdf)<br>[Contribution journal PDF](docs/MTJournal_C_JosephClay_ITAI1371.pdf) | 2d6c658 | Done |
+| 8 | **Final clean dataset** | [**`stroke_clean_final.csv`**](data/processed/stroke_clean_final.csv) | a7ddbbc | Done |
+| 8+ | Test set (support) | [`stroke_test_transformed.csv`](data/processed/stroke_test_transformed.csv) | a7ddbbc | Done |
+
+* Item 8 is the train set after balancing; synthetic rows are marked in `is_synthetic` (D8).
+* Item 8+ is not a Canvas item: the test set, transformed only, never balanced.
+* Raw data: `data/raw/healthcare-dataset-stroke-data.csv` (never edited; `data/raw/SHA256SUMS`).
+
+<details>
+<summary>Canvas item text (verbatim)</summary>
+
+1. "Upload document showing URL of original dataset"
+2. "Upload pdf describing dataset and proposal, not more than a page"
+3. "In jupyter notebook use python to split dataset: training 70%, testing 30%; Python loads
+   training data into memory; do not split manually or in excel"
+4. "EDA performed only on training data; testing data untouched"
+5. "Jupyter notebook demonstrating before and after data processing"
+6. "Upload the .ipynb"
+7. "Upload detailed proposal (reflection journal) of what you accomplished; each team member
+   talks about contribution in the contribution journal"
+8. "Upload final clean dataset"
+
+</details>
+
+## Decisions
+
+Every method choice is a signed decision card in [`docs/decisions/`](docs/decisions/) with an ADR
+in [`docs/adr/`](docs/adr/).
+
+```text
+D1  split ............ plain random 70/30 split, seed 33, no stratify ............ ADR 0001
+D2  rows, columns .... drop the gender Other row and id ........................... ADR 0002
+D3  missing values ... median fill for bmi plus a bmi_missing flag ................ ADR 0003
+D4  encoding ......... full one hot encoding, handle_unknown ignore ............... ADR 0004
+D5  scaling .......... StandardScaler on age, avg_glucose_level, bmi .............. ADR 0005
+D6  order ............ fill, encode, scale, then SMOTE, train only ................ ADR 0006
+D7  SMOTE setup ...... plain SMOTE on work_type, k 5, auto, seed 33, float first .. ADR 0007
+D8  after SMOTE ...... repair A, check C, scaled units, is_synthetic flag ......... ADR 0008
+```
+
+One root cause note: [`docs/rca/0001-smote-int-truncation.md`](docs/rca/0001-smote-int-truncation.md).
 
 ## Balancing
 
@@ -42,23 +162,41 @@ seed 33, after casting to float (D6, D7; ADRs 0006, 0007). Every group reached 2
 9). Blended 0/1 and one hot values were repaired, range checked and flagged with is_synthetic (D8;
 ADR 0008).
 
-## Decisions
+## How this was built
 
-All method choices are recorded as signed decision cards in `docs/decisions/` and as ADRs in
-`docs/adr/`.
+This project was built with **multi agent orchestration**: one builder agent and five subagents
+in Kiro CLI, each with one lane, working between four checkpoints that only I could sign.
 
-| Card | Question | My choice (fill after signing) | ADR |
-|---|---|---|---|
-| D1 | How to split 70/30 | plain random 70/30 split, seed 33, no stratify | 0001 |
-| D2 | Rare categories and identifier columns | drop the gender Other row and id | 0002 |
-| D3 | Missing values | median fill for bmi plus a bmi_missing flag | 0003 |
-| D4 | Encoding the text columns | full one hot encoding, handle_unknown ignore | 0004 |
-| D5 | Scaling and normalization | StandardScaler on age, avg_glucose_level, bmi | 0005 |
-| D6 | Order of steps around SMOTE | fill, encode, scale, then SMOTE, train only | 0006 |
-| D7 | SMOTE setup | plain SMOTE on work_type, k 5, auto, seed 33, float first | 0007 |
-| D8 | Repair and checks after SMOTE | repair A, check C, scaled units, is_synthetic flag | 0008 |
+```text
+Joseph               decides, writes, signs, tags, pushes
+│
+├── builder          writes notebook cells and pipeline functions from signed cards
+├── notebook-runner  runs notebooks in a fresh kernel; mechanical fixes only
+├── data-validator   recomputes every number I wrote; leakage and integrity checks
+├── work-verifier    checks the other agents against my cards and the role matrix
+├── repo-auditor     fresh clone audits, run log, agent commits, checkpoint summary
+└── tutor-reviewer   explains concepts and asks me questions; writes nothing
+```
 
-## Working method
+One checkpoint cycle, repeated for H1 to H4:
+
+```text
+Joseph    builder    runner    validator    verifier    auditor
+  │ sign     │          │          │            │           │
+  ├─────────▶│ build    │          │            │           │
+  │          ├─────────▶│ run, fix │            │           │
+  │          │          ├─────────▶│ check      │           │
+  │          │          │          ├───────────▶│ check     │
+  │          │          │          │            ├──────────▶│ audit, commit
+  │◀─────────┴──────────┴──────────┴────────────┴───────────┤ H#_SUMMARY.md
+  │ approve or correct, write, sign GATES.md, tag, push     │
+```
+
+Roles and rules: [`.kiro/steering/`](.kiro/steering/), [`.kiro/agents/`](.kiro/agents/),
+[`.claude/agents/`](.claude/agents/). Run log: [`docs/reports/RUN_LOG.md`](docs/reports/RUN_LOG.md).
+Checkpoint sign offs: [`docs/tracking/GATES.md`](docs/tracking/GATES.md).
+
+### Working method
 
 **Tools used:** Kiro CLI with a builder agent and the five project subagents (notebook-runner,
 data-validator, work-verifier, repo-auditor, tutor-reviewer). I also used an AI assistant (Grok
@@ -101,54 +239,66 @@ and checkpoint tags.
   was also my chance to apply multi agent orchestration, which I learned from that reference, and I
   count it as part of my learning process and individual contribution.
 
-## Repo map
+## Project structure
 
 ```text
-data/raw/          original CSV + SHA256SUMS (never edited)
-data/interim/      train and test files from notebook 01, optional prepared train from notebook 03
-data/processed/    final clean dataset + transformed test set (notebook 04)
-notebooks/         01_load_split, 02_eda_train, 03_preprocess_before_after, 04_smote_balance
-src/stroke_prep/   config (facts + your decisions) and pipeline functions (stubs at start)
-tests/             environment, raw data, and invariant tests (skip until artifacts exist)
-docs/              dataset_url, specs, decisions, adr, rca, journals, tracking, reports
-scripts/           tooling (see below)
-.claude/agents/    Claude Code: the five subagents (notebook-runner, data-validator, work-verifier,
-                   repo-auditor, tutor-reviewer) and README.md with the role matrix
-.kiro/agents/      Kiro CLI: the same five agents plus the builder, as JSON configs
-.kiro/steering/    Kiro CLI: house rules, checkpoints, role matrix (same rules as CLAUDE.md)
+.
+├── data/
+│   ├── raw/            original CSV + SHA256SUMS (never edited)
+│   ├── interim/        train and test (nb01); prepared train and fitted objects (nb03)
+│   └── processed/      final clean dataset + transformed test set (nb04)
+├── notebooks/          01_load_split, 02_eda_train, 03_preprocess_before_after,
+│                       04_smote_balance
+├── src/stroke_prep/    config (facts + my decisions) and pipeline functions
+├── tests/              environment, raw data and invariant tests
+├── docs/
+│   ├── decisions/      signed decision cards D1 to D8
+│   ├── adr/            ADRs 0001 to 0008
+│   ├── rca/            root cause notes
+│   ├── journals/       reflection and contribution journals, proposal outline
+│   ├── reports/        agent reports, RUN_LOG, checkpoint summaries H1 to H4
+│   ├── tracking/       checkpoint sign offs (GATES.md)
+│   └── specs/          Canvas requirements and notebook specs
+├── scripts/            tooling (see Quality checks)
+├── .kiro/              Kiro CLI agents and steering (house rules, checkpoints, role matrix)
+└── .claude/            Claude Code agents and the role matrix
 ```
 
-## How to run
+## Quality checks
 
-Tested on Python 3.14 and 3.13 (CI runs both).
-
-```bash
-python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt
-python scripts/setup_gate.py
-python -m pytest -q
-jupyter lab            # run notebooks 01 to 04 in order, Restart and Run All
-python scripts/check_deliverables.py
-```
-
-Full checklist: [VALIDATION_PROTOCOL.md](VALIDATION_PROTOCOL.md).
-
-## Tooling (Engineering extra, not graded)
-
-These files are infrastructure, not assignment answers: `scripts/setup_gate.py` (environment
-check), `scripts/check_raw_hash.py` (raw data guard), `scripts/check_deliverables.py` (lists
-missing Canvas files), `scripts/check_commit_msg.py` (commit message format),
-`scripts/list_claims.py` (lists every number in your prose for the validator),
-`scripts/compare_outputs.py` (committed vs rerun notebook outputs), `.pre-commit-config.yaml`,
-`.github/workflows/ci.yml`, `tests/`, `.claude/` and `.kiro/`. The checkpoints H1 to H4, decision cards, ADRs
-and RCA notes are also engineering extras that support Documentation.
-
-## Canvas text box line (paste at submission)
+Engineering extras, not graded; they support Documentation.
 
 ```text
-https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda at commit 225dae8; final files data/processed/stroke_clean_final.csv and data/processed/stroke_test_transformed.csv
+python -m pytest -q             raw data, split, pipeline contract and final file invariants
+scripts/check_raw_hash.py       raw CSV unchanged (SHA-256)
+scripts/check_deliverables.py   every Canvas file present
+scripts/compare_outputs.py      committed vs rerun notebook outputs
+scripts/list_claims.py          every number in my prose, for the data-validator
+scripts/check_commit_msg.py     commit message format
+scripts/setup_gate.py           environment check
+.pre-commit-config.yaml         nbstripout, ruff, raw hash, fast tests, commit message
+.github/workflows/ci.yml        CI on Python 3.13 and 3.14, deliverables gate
 ```
+
+At H4 a fresh clone with a new environment reran all four notebooks with matching outputs, and
+`check_deliverables.py` reported all 11 files present (`docs/reports/H4_SUMMARY.md`). One test
+skips by design: `id` was dropped at D2, so the id trace check has nothing to trace.
+
+## Submission
+
+Canvas text box line:
+
+```text
+https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda
+tag H4-signed (final commit is the latest on main)
+final:  data/processed/stroke_clean_final.csv
+test:   data/processed/stroke_test_transformed.csv
+```
+
+## Author
+
+Joseph Clay, ITAI 1371. Individual project.
 
 ## License
 
-MIT, see `LICENSE`.
+MIT, see [`LICENSE`](LICENSE).

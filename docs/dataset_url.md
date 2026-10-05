@@ -11,4 +11,3 @@
 
 **Approved:** dataset submitted for approval on Canvas on Sep 17, 2026.
 
-> Joseph: if you want, add one sentence in your own words about why you chose this dataset.
