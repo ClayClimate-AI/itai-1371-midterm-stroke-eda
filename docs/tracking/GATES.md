@@ -43,4 +43,4 @@ They must STOP and escalate (it reaches you under "Waiting for you" in the summa
 | H1 | 10/04/2026 11:33 AM | 07ba010 | docs/reports/H1_SUMMARY.md | D2 to D8 deferred to H2; decided from train EDA | Joseph Clay |
 | H2 | 10/04/2026 4:23 PM | f4b696f | docs/reports/H2_SUMMARY.md | Kept D1. Signed D2 to D8 from train EDA (ccc2dc4). 3 validator fixes in nb02 (c17a968). Test shares in nb01 kept because the D1 card requires them. | Joseph Clay |
 | H3 | 10/04/2026 6:47 PM | 1f4ae1e | docs/reports/H3_SUMMARY.md | Kept D2 to D8 (reviews 550d8a9). ADRs 0002 to 0008 saved. Notes in nb03 and nb04. Validator 0 mismatches, 64 tests pass. | Joseph Clay |
-| H4 | | | | | |
+| H4 | 10/04/2026 9:05 PM | 225dae8 | docs/reports/H4_SUMMARY.md | Journals, proposal, README, RCA 0001 done. Validator 0 open items, check_deliverables OK 11 of 11, 64 tests pass, 1 skip accepted (id dropped at D2). | Joseph Clay |

@@ -146,7 +146,7 @@ and RCA notes are also engineering extras that support Documentation.
 ## Canvas text box line (paste at submission)
 
 ```text
-[fill at H4: repo URL, final commit hash, path of the final clean dataset, path of the test set.]
+https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda at commit 225dae8; final files data/processed/stroke_clean_final.csv and data/processed/stroke_test_transformed.csv
 ```
 
 ## License
