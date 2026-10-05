@@ -1,12 +1,7 @@
 # Stroke Prediction Dataset: EDA, Preprocessing and SMOTE Balancing
 
-![Course](https://img.shields.io/badge/course-ITAI%201371%20Midterm-1f6feb)
 ![Checkpoints](https://img.shields.io/badge/checkpoints-H1%20to%20H4%20signed-2ea44f)
 ![Python](https://img.shields.io/badge/python-3.13%20%7C%203.14-3776ab?logo=python&logoColor=white)
-![Jupyter](https://img.shields.io/badge/notebooks-4-f37626?logo=jupyter&logoColor=white)
-![Balancing](https://img.shields.io/badge/balancing-SMOTE%20on%20work__type-8250df)
-![Tests](https://img.shields.io/badge/tests-64%20passed%2C%201%20skipped-2ea44f)
-![Built with](https://img.shields.io/badge/built%20with-multi%20agent%20orchestration-ff6f00)
 ![Agents](https://img.shields.io/badge/Kiro%20CLI-builder%20%2B%205%20subagents-6e40c9)
 [![CI](https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda/actions/workflows/ci.yml/badge.svg)](https://github.com/ClayClimate-AI/itai-1371-midterm-stroke-eda/actions/workflows/ci.yml)
 ![License](https://img.shields.io/badge/license-MIT-lightgrey)
