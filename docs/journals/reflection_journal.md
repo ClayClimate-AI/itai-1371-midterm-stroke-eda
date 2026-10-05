@@ -18,8 +18,8 @@
 ## 2. The data before processing
 * Which data problems did your EDA show? Which chart or printed output showed each one?
   bmi was missing in 138 train rows (about 4%), and those rows were older, had higher glucose, and
-  had far more strokes, so the gaps were not random. One train row had gender Other. stroke is only
-  4.7% positive. Never_worked had just 13 train rows (nb02).
+  had far more strokes, so the gaps were not random (nb03 cell 19). One train row had gender Other.
+  stroke is only 4.7% positive. Never_worked had just 13 train rows (nb02).
 * Was there anything in the data you expected to find and did not? Describe it.
   I expected missing values in more columns, but only bmi had gaps. smoking_status "Unknown" acts
   like hidden missing data, but it isn't counted as missing, so I kept it as its own category.
@@ -56,7 +56,7 @@
   overall the stroke share fell from 0.0470 to 0.0305 (cell 23). Within groups (cell 25), Govt_job
   went 0.0542 to 0.0402, Self-employed 0.0752 to 0.0613, children 0.0042 to 0.0034, Private stayed
   0.0475, and Never_worked stayed 0. SMOTE balanced work_type, not stroke, and the repair rounded
-  many blended stroke values down to 0, so stroke rates fell inside the groups that grew.
+  some blended stroke values down to 0, so stroke rates fell inside the groups that grew.
 * Compare one numeric column before and after balancing. Describe what you see and why.
   age had a real mean of 43.17 and a synthetic mean of 31.77 (cell 30). Synthetic rows are younger
   because many come from the children and Never_worked groups.

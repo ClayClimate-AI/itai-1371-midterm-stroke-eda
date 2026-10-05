@@ -40,7 +40,7 @@
 **What AI did:**
 * The Kiro builder agent wrote the Python code (notebook cells and functions) from the decisions I signed on the decision cards, and drafted the ADRs from those cards for me to review and save.
 * Between my checkpoints, the notebook-runner, data-validator, work-verifier and repo-auditor ran the notebooks, checked them and each other, and wrote a one page summary for each checkpoint. At H2 they flagged two items for me: the builder read one file outside the project folder (a kernel settings file), and notebook 01 prints test shares. I kept the test shares because the D1 card's checks require them.
-* At H3 the builder stopped and escalated because it had chosen a SMOTE input setting (cast to float first) that my D7 card left open. I reviewed both options and signed float first, so blended 0/1 values get rounded at 0.5 instead of being cut off.
+* At H3 the builder made the float change, and the work-verifier then raised it as escalation E3 for my review because it had chosen a SMOTE input setting (cast to float first) that my D7 card left open. I reviewed both options and signed float first, so blended 0/1 values get rounded at 0.5 instead of being cut off.
 * The tutor-reviewer explained concepts, like how a random seed works, and asked me questions.
 * The AI assistant explained each data chart, recommended an option for D2 to D8 with pros and cons, and drafted the wording of my EDA observations and decision card text from the numbers in my notebooks.
 

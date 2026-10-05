@@ -94,8 +94,8 @@ No agent escalation is open. Items only you decide (text MISMATCH = interpretati
 2. MISMATCH J5, reflection journal §2 cites nb02; the missing vs present bmi values are printed by nb03 cell 19 In[11] (validator §1b; verifier #15).
 3. NO SOURCE CELL J17, reflection journal §5 "rounded many blended stroke values down to 0": no cell prints the direction; recomputed of 194: 95 to 0, 99 to 1 (validator §1b).
 4. Fact note: README l.75 and contribution journal l.43 say "At H3 the builder stopped and escalated"; RUN_LOG #17 (16:13) "no escalation at the time", #18 E3 raised by the work-verifier (1622 #10) and the builder (validator §1h).
-5. B1.4 skip: keep or change `tests/test_invariants_final.py:58` skip (verifier #12; auditor B1.4). Tests are yours; agents changed nothing.
-6. Verifier FLAGs 8 (builder writes in scratch/), 9 (/tmp PNG), 10 (WeasyPrint outside the venv): approve or correct each. FLAG 5 closed by RUN_LOG #33; FLAGs 12, 14, 15 = items 5, 1, 2.
+5. B1.4 skip: keep or change `tests/test_invariants_final.py:58` skip (verifier #12; auditor B1.4). Tests are yours; agents changed nothing. Skip accepted: id was dropped at D2 by design.
+6. Verifier FLAGs 8 (builder writes in scratch/), 9 (/tmp PNG), 10 (WeasyPrint outside the venv): approve or correct each. [x] FLAG 8 approved [x] FLAG 9 approved [x] FLAG 10 approved. FLAG 5 closed by RUN_LOG #33; FLAGs 12, 14, 15 = items 5, 1, 2.
 7. README "Canvas text box line" (your note: line 109; in the file at 6577524 the placeholder is line 148): still `[fill at H4: ...]` (yours, at submission).
 8. Definition of done ticks, LAB_GUIDE §7 (S1 to S10).
 9. `docs/tracking/GATES.md` H4 row (empty), tag `H4-signed`, push with tags; CI result for the pushed commit (B2.1 to B2.3 NOT VERIFIED by agents).
