@@ -9,6 +9,8 @@
 A reproducible pipeline that takes the Kaggle stroke dataset from raw CSV to a balanced, model
 ready train file and an untouched test file, built with multi agent orchestration.
 
+**Live companion site:** [itai-1371-midterm-stroke-eda.netlify.app](https://itai-1371-midterm-stroke-eda.netlify.app) is an animated, visual walkthrough of this project for anyone who wants to learn how it works.
+
 **Student:** Joseph Clay (independent contributor) | **Course:** ITAI 1371 | **Due:** see Canvas
 
 ## Contents
