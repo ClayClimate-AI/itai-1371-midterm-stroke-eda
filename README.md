@@ -33,7 +33,7 @@ file of 10200 rows by 23 columns (nb04 cells 9, 33). The test file was never bal
 same 23 columns.
 
 > Every decision was structured around remaining in control and in the loop at the appropriate entry points. A Kiro CLI builder
-> agent wrote the code from my signed decision cards, and five subagents ran, checked and audited
+> agent implemented the code from my signed decision cards, and five subagents ran, checked and audited
 > the work between four checkpoints that only I could sign. See
 > [How this was built](#how-this-was-built).
 
