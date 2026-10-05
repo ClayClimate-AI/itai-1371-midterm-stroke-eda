@@ -412,3 +412,36 @@ Change:  none to code or data; .gitignore unchanged
 Rule:    n/a (no escalations)
 Commit:  docs(agent): H4 reports, run log and summary  [H4]
 ```
+
+```text
+#36  2026-10-04 20:38 CT  data-validator  since H3 (a126aa1, H3-signed)
+Type:    RERUN (claims recheck, no code or data changed)
+What:    recheck of Joseph's corrected text in scratch/h4/ vs HEAD 292938c: 6 items, 4 MATCH (R1 nb04 cell 26, R4 README and contribution E3 order, R5 H4_SUMMARY verifier section byte identical, R6 journal PDFs = markdown), 1 MISMATCH cited cell (R2 reflection §2 "(nb03 cell 19)" covers 1 of 6 claims; values MATCH), 1 MATCH with NO SOURCE CELL (R3 "95 of 194", 95 recomputed only)
+Why:     H4 recheck of validator items N2, J5, J17 before Joseph's commit
+Files:   docs/reports/data-validator/H4_20261004_2038_recheck.md
+Change:  none
+Rule:    n/a (no escalations; R2, R3 are Joseph's text, closed by #37)
+Commit:  docs(agent): H4 recheck reports and run log  [H4]
+```
+
+```text
+#37  2026-10-04 20:47 CT  data-validator  since H3 (a126aa1, H3-signed)
+Type:    RERUN (claims recheck 2, no code or data changed)
+What:    recheck 2 of reflection §2 (citations moved) and §5 ("95 of 194" -> "some") plus the R journal PDF: 3 items, 3 MATCH, 0 MISMATCH, 0 NO SOURCE CELL; closes #36 R2 and R3 (fact noted: 138 and about 4% sit before the first citation; printed in nb02 cell 16 and nb03 cell 18)
+Why:     H4 recheck after Joseph's second correction
+Files:   docs/reports/data-validator/H4_20261004_2047_recheck2.md
+Change:  none
+Rule:    n/a (no escalations)
+Commit:  docs(agent): H4 recheck reports and run log  [H4]
+```
+
+```text
+#38  2026-10-04 20:56 CT  repo-auditor  since H3 (a126aa1, H3-signed)
+Type:    RERUN (H4 close-out quick checks on HEAD 7f0ad8c, working copy, read only)
+What:    Joseph's commit 7f0ad8c "docs(h4): fix validator items, accept B1.4 skip, approve flags 8 to 10 [H4]" (= origin/main) changes README.md, 2 journals .md, 2 journal PDFs, H4_SUMMARY.md (Waiting for you items 5, 6), nb04 (1 cell); checks: raw hash OK, pytest 64 passed 1 skipped, ruff check src notebooks clean, check_deliverables OK 11 of 11; nb04 292938c vs HEAD: 46 cells each, only cell 26 (markdown) differs, all code cells and outputs identical; H4_SUMMARY.md verifier section (START to END markers) byte identical to work-verifier/H4_20261004_2011.md; working tree clean apart from the 2 recheck reports
+Why:     H4 close-out log and commit
+Files:   docs/reports/RUN_LOG.md, docs/reports/data-validator/H4_20261004_2038_recheck.md, docs/reports/data-validator/H4_20261004_2047_recheck2.md
+Change:  none to code or data; .gitignore unchanged; no Joseph file touched
+Rule:    n/a (no escalations)
+Commit:  docs(agent): H4 recheck reports and run log  [H4]
+```
